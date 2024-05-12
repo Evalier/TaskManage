@@ -43,7 +43,7 @@ When ready, merge remote personal branch with remote main
       git checkout personal-branch
       git merge main
    Push updated branch
-      git push TaskManage personal-main
+      git push TaskManage personal-branch
    Create a pull request (probably not needed at this stage)
    Review, approve, merge
 When necessary, update elements of local repository with features from remote main
