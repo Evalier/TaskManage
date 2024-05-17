@@ -15,8 +15,8 @@ This is a possible better way of organizing our code.
 2) Better Way of Organizing Code
 
 src           // source code directory
-   taskmanage                // project that contains all the other projects. This automatically happens when you begin each project the same way (taskmanage.feature, taskmanage.model, etc.)
-      constants              // project
+   taskmanage                // package that contains all the other projects. This automatically happens when you begin each project the same way (taskmanage.feature, taskmanage.model, etc.)
+      constants              // package
          EnumsAndConstants   // java class
       controller
          TaskController
