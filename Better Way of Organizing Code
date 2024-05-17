@@ -1,0 +1,46 @@
+This is a possible better way of organizing our code.
+
+1) Important Details
+   I'm not structuring the code by branches. While we can still (and should) utilize the use of branches to merge code to our own main and to the main branch on GitHub, this is more about a permenant way 
+   to view the structure of the code. Branches--after all--are only temporary ways to organize the code during development. I think this is how the code should look when we finish the project.
+
+   The code is mainly organized using packages. There are 7 packages containing the different types of java classes, and there are 19 classes in total.
+
+   The four main "screen" classes have been expanded out into their different roles. While there is still a package for ui that contains the original names of the four classes (except for Calendar, which has
+   been changed to CalendarView to avoid confusion with CalendarModel in the model package), this ui package will now be mainly concerned with only the ui elements of those classes. The functions
+   and features of them has now been spread out to all of the other java files--in addition to other features and functions.
+
+   Some features that we have still not really addressed from our proposals include statistics graphs, habit trackers, and other stuff. I tried to include them in here.
+
+2) Better Way of Organizing Code
+
+src           // source code directory
+   taskmanage                // project that contains all the other projects. This automatically happens when you begin each project the same way (taskmanage.feature, taskmanage.model, etc.)
+      constants              // project
+         EnumsAndConstants   // java class
+      controller
+         TaskController
+         ViewController
+      feature
+         HabitTracker
+         PriorityManager
+         ReminderManager
+         StatisticsManager
+      main
+         Main
+      model
+         CalendarModel
+         SubTask
+         Task
+         User
+      ui
+         CalendarView
+         HomeDashboard
+         TaskCreation
+         TaskView
+      utility
+         DatabaseConnector
+         DataValidator
+         SecurityManager
+
+   
