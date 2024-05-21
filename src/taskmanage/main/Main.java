@@ -9,5 +9,7 @@ public class Main {
         // For example, you might create and show the main application window here
         // MainWindow mainWindow = new MainWindow();
         // mainWindow.show();
+
+        // small comment addition in main to test if a certain git command works
     }
 }
