@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.TaskViewController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <children>
+        <Label fx:id="nameLabel" text="Task Name"/>
+        <TextArea fx:id="descriptionArea" promptText="Description"/>
+        <Label fx:id="dueDateLabel" text="Due Date"/>
+        <Label fx:id="priorityLabel" text="Priority"/>
+        <Label fx:id="statusLabel" text="Status"/>
+        <Label fx:id="tagsLabel" text="Tags"/>
+        <TableView fx:id="taskTable">
+            <columns>
+                <TableColumn fx:id="nameColumn" text="Task Name"/>
+                <TableColumn fx:id="descriptionColumn" text="Description"/>
+                <TableColumn fx:id="dueDateColumn" text="Due Date"/>
+                <TableColumn fx:id="priorityColumn" text="Priority"/>
+                <TableColumn fx:id="statusColumn" text="Status"/>
+                <TableColumn fx:id="tagsColumn" text="Tags"/>
+            </columns>
+        </TableView>
+        <Button text="Refresh" onAction="#handleRefresh"/>
+        <Button text="Edit" onAction="#handleEdit"/>
+        <Button text="Delete" onAction="#handleDelete"/>
+    </children>
+</VBox>

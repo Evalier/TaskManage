@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.TaskCreationController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <children>
+        <Label text="Create New Task" fx:id="titleLabel"/>
+        <TextField fx:id="taskNameField" promptText="Task Name"/>
+        <TextArea fx:id="taskDescriptionField" promptText="Description"/>
+        <DatePicker fx:id="dueDatePicker" promptText="Due Date"/>
+        <ComboBox fx:id="priorityComboBox" promptText="Priority">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="High"/>
+                    <String fx:value="Medium"/>
+                    <String fx:value="Low"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <TextField fx:id="tagsField" promptText="Tags (comma-separated)"/>
+        <Button text="Save Task" onAction="#handleSaveTask"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </children>
+</VBox>
