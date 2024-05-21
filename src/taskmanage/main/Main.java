@@ -11,5 +11,6 @@ public class Main {
         // mainWindow.show();
 
         // small comment addition in main to test if a certain git command works
+        // accidentally deleted commit history
     }
 }
