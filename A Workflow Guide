@@ -1,0 +1,51 @@
+Current Tasks: (last updated 5/12)
+Implement chosen screen source code files and push to main
+
+Important Information:
+Commit and push changes to GitHub at least once a week
+
+We still have a high degree of freedom to implement the project as we see fit, just make sure when we change something from the proposal there is a good reason.
+
+Try to use the same notation throughout the project
+   My notation for the branches:
+      If its for a screen
+         screen-home-dashboard
+         screen-calendar
+      For a feature branch
+         feature/home-dashboard
+         superAmazingFeature/home-dashboard
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+WORKFLOW:
+Create a personal branch
+   Acts as a personal main
+   I named mine dylan-main
+   This is so that we have a place to push our changes to on the remote repository without fear of overwriting stuff on Main when we are not ready, and also have our work able to be viewed by others
+   Personally I find it easier to use the IntelliJ UI. The branch information for checking out and creating new branches is at the top next to the name of the project
+Create necessary individual branches
+   Isolate chosen work
+Work on source code and develop features
+Commit code of the individual branches AND merge with personal branch
+   CMI commands
+      git add .                                      //stages all changes in current directory and sub directories
+      git commit -m “message about changes made”
+      git checkout personal-main                     //I find it easier to use the UI for checking branches out
+      git merge screen-branch-name OR feature/branch-name
+Push/merge personal branch with personal branch on GitHub
+   CMI commands
+      git merge TaskManage personal-main
+      git push TaskManage personal-main              //basically same thing
+When ready, merge remote personal branch with remote main
+   Update personal branch and resolve any conflicts
+      git checkout personal-branch
+      git pull TaskManage main
+      git checkout personal-branch
+      git merge main
+   Push updated branch
+      git push TaskManage personal-branch
+   Create a pull request (probably not needed at this stage)
+   Review, approve, merge
+When necessary, update elements of local repository with features from remote main
+   Same process as updating before merging with remote main
+   Ensure we are keeping up with changes from everybody else
