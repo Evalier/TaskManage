@@ -1,0 +1,466 @@
+
+--------------------------------------------------
+- Package: java.awt
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.awt.event
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.io
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.lang
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.lang.invoke
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.security
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.sql
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.time
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.time.format
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.time.temporal
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.util
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.util.logging
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: java.util.stream
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javafx.application
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javafx.collections
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javafx.fxml
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javafx.scene
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javafx.scene.control
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javafx.scene.control.cell
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javafx.stage
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javax.swing
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: javax.swing.table
+--------------------------------------------------
+No stats available: package referenced, but not analyzed.
+
+--------------------------------------------------
+- Package: taskmanage.constants
+--------------------------------------------------
+
+Stats:
+    Total Classes: 3
+    Concrete Classes: 3
+    Abstract Classes: 0
+
+    Ca: 6
+    Ce: 1
+
+    A: 0
+    I: 0.14
+    D: 0.86
+
+Abstract Classes:
+
+Concrete Classes:
+    taskmanage.constants.EnumsAndConstants
+    taskmanage.constants.EnumsAndConstants$PriorityLevel
+    taskmanage.constants.EnumsAndConstants$TaskStatus
+
+Depends Upon:
+    java.lang
+
+Used By:
+    taskmanage.controller
+    taskmanage.feature
+    taskmanage.main
+    taskmanage.model
+    taskmanage.ui
+    taskmanage.utility
+
+--------------------------------------------------
+- Package: taskmanage.controller
+--------------------------------------------------
+
+Stats:
+    Total Classes: 6
+    Concrete Classes: 6
+    Abstract Classes: 0
+
+    Ca: 2
+    Ce: 16
+
+    A: 0
+    I: 0.89
+    D: 0.11
+
+Abstract Classes:
+
+Concrete Classes:
+    taskmanage.controller.CalendarViewController
+    taskmanage.controller.HomeDashboardController
+    taskmanage.controller.TaskController
+    taskmanage.controller.TaskCreationController
+    taskmanage.controller.TaskViewController
+    taskmanage.controller.ViewController
+
+Depends Upon:
+    java.io
+    java.lang
+    java.lang.invoke
+    java.sql
+    java.time
+    java.util
+    java.util.stream
+    javafx.collections
+    javafx.fxml
+    javafx.scene
+    javafx.scene.control
+    javafx.scene.control.cell
+    javafx.stage
+    taskmanage.constants
+    taskmanage.model
+    taskmanage.utility
+
+Used By:
+    taskmanage.main
+    taskmanage.ui
+
+--------------------------------------------------
+- Package: taskmanage.feature
+--------------------------------------------------
+
+Stats:
+    Total Classes: 4
+    Concrete Classes: 4
+    Abstract Classes: 0
+
+    Ca: 0
+    Ce: 8
+
+    A: 0
+    I: 1
+    D: 0
+
+Abstract Classes:
+
+Concrete Classes:
+    taskmanage.feature.HabitTracker
+    taskmanage.feature.PriorityManager
+    taskmanage.feature.ReminderManager
+    taskmanage.feature.StatisticsManager
+
+Depends Upon:
+    java.io
+    java.lang
+    java.lang.invoke
+    java.time
+    java.time.temporal
+    java.util
+    taskmanage.constants
+    taskmanage.model
+
+Used By:
+    Not used by any packages.
+
+--------------------------------------------------
+- Package: taskmanage.main
+--------------------------------------------------
+
+Stats:
+    Total Classes: 1
+    Concrete Classes: 1
+    Abstract Classes: 0
+
+    Ca: 0
+    Ce: 8
+
+    A: 0
+    I: 1
+    D: 0
+
+Abstract Classes:
+
+Concrete Classes:
+    taskmanage.main.Main
+
+Depends Upon:
+    java.lang
+    javafx.application
+    javafx.fxml
+    javafx.scene
+    javafx.stage
+    taskmanage.constants
+    taskmanage.controller
+    taskmanage.model
+
+Used By:
+    Not used by any packages.
+
+--------------------------------------------------
+- Package: taskmanage.model
+--------------------------------------------------
+
+Stats:
+    Total Classes: 6
+    Concrete Classes: 6
+    Abstract Classes: 0
+
+    Ca: 5
+    Ce: 6
+
+    A: 0
+    I: 0.55
+    D: 0.45
+
+Abstract Classes:
+
+Concrete Classes:
+    taskmanage.model.CalendarModel
+    taskmanage.model.Habit
+    taskmanage.model.Reminder
+    taskmanage.model.SubTask
+    taskmanage.model.Task
+    taskmanage.model.User
+
+Depends Upon:
+    java.lang
+    java.lang.invoke
+    java.time
+    java.util
+    taskmanage.constants
+    taskmanage.utility
+
+Used By:
+    taskmanage.controller
+    taskmanage.feature
+    taskmanage.main
+    taskmanage.ui
+    taskmanage.utility
+
+--------------------------------------------------
+- Package: taskmanage.ui
+--------------------------------------------------
+
+Stats:
+    Total Classes: 6
+    Concrete Classes: 6
+    Abstract Classes: 0
+
+    Ca: 0
+    Ce: 13
+
+    A: 0
+    I: 1
+    D: 0
+
+Abstract Classes:
+
+Concrete Classes:
+    taskmanage.ui.CalendarView
+    taskmanage.ui.HomeDashboard
+    taskmanage.ui.TaskCreation
+    taskmanage.ui.TaskCreation$1
+    taskmanage.ui.TaskCreation$2
+    taskmanage.ui.TaskView
+
+Depends Upon:
+    java.awt
+    java.awt.event
+    java.io
+    java.lang
+    java.lang.invoke
+    java.util
+    java.util.stream
+    javax.swing
+    javax.swing.table
+    taskmanage.constants
+    taskmanage.controller
+    taskmanage.model
+    taskmanage.utility
+
+Used By:
+    Not used by any packages.
+
+--------------------------------------------------
+- Package: taskmanage.utility
+--------------------------------------------------
+
+Stats:
+    Total Classes: 3
+    Concrete Classes: 3
+    Abstract Classes: 0
+
+    Ca: 3
+    Ce: 10
+
+    A: 0
+    I: 0.77
+    D: 0.23
+
+Abstract Classes:
+
+Concrete Classes:
+    taskmanage.utility.DataValidator
+    taskmanage.utility.DatabaseConnector
+    taskmanage.utility.SecurityManager
+
+Depends Upon:
+    java.io
+    java.lang
+    java.lang.invoke
+    java.security
+    java.sql
+    java.time
+    java.time.format
+    java.util.logging
+    taskmanage.constants
+    taskmanage.model
+
+Used By:
+    taskmanage.controller
+    taskmanage.model
+    taskmanage.ui
+
+
+--------------------------------------------------
+- Package Dependency Cycles:
+--------------------------------------------------
+
+taskmanage.controller
+    |
+    |-> taskmanage.utility
+    |   taskmanage.model
+    |-> taskmanage.utility
+
+taskmanage.feature
+    |
+    |-> taskmanage.model
+    |   taskmanage.utility
+    |-> taskmanage.model
+
+taskmanage.main
+    |
+    |   taskmanage.controller
+    |-> taskmanage.utility
+    |   taskmanage.model
+    |-> taskmanage.utility
+
+taskmanage.model
+    |
+    |   taskmanage.utility
+    |-> taskmanage.model
+
+taskmanage.ui
+    |
+    |   taskmanage.controller
+    |-> taskmanage.utility
+    |   taskmanage.model
+    |-> taskmanage.utility
+
+taskmanage.utility
+    |
+    |   taskmanage.model
+    |-> taskmanage.utility
+
+
+--------------------------------------------------
+- Summary:
+--------------------------------------------------
+
+Name, Class Count, Abstract Class Count, Ca, Ce, A, I, D, V:
+
+java.awt,0,0,1,0,0,0,1,1
+java.awt.event,0,0,1,0,0,0,1,1
+java.io,0,0,4,0,0,0,1,1
+java.lang,0,0,7,0,0,0,1,1
+java.lang.invoke,0,0,5,0,0,0,1,1
+java.security,0,0,1,0,0,0,1,1
+java.sql,0,0,2,0,0,0,1,1
+java.time,0,0,4,0,0,0,1,1
+java.time.format,0,0,1,0,0,0,1,1
+java.time.temporal,0,0,1,0,0,0,1,1
+java.util,0,0,4,0,0,0,1,1
+java.util.logging,0,0,1,0,0,0,1,1
+java.util.stream,0,0,2,0,0,0,1,1
+javafx.application,0,0,1,0,0,0,1,1
+javafx.collections,0,0,1,0,0,0,1,1
+javafx.fxml,0,0,2,0,0,0,1,1
+javafx.scene,0,0,2,0,0,0,1,1
+javafx.scene.control,0,0,1,0,0,0,1,1
+javafx.scene.control.cell,0,0,1,0,0,0,1,1
+javafx.stage,0,0,2,0,0,0,1,1
+javax.swing,0,0,1,0,0,0,1,1
+javax.swing.table,0,0,1,0,0,0,1,1
+taskmanage.constants,3,0,6,1,0,0.14,0.86,1
+taskmanage.controller,6,0,2,16,0,0.89,0.11,1
+taskmanage.feature,4,0,0,8,0,1,0,1
+taskmanage.main,1,0,0,8,0,1,0,1
+taskmanage.model,6,0,5,6,0,0.55,0.45,1
+taskmanage.ui,6,0,0,13,0,1,0,1
+taskmanage.utility,3,0,3,10,0,0.77,0.23,1
