@@ -1,0 +1,16 @@
+Implement Interfaces and use the Facade Design
+
+Will use packages to target for these changes
+
+Interfaces
+    * Controller
+    * Features
+    * models
+
+Facades
+    * utility
+    * controller
+    * feature
+    * model
+
+Implement completely package by package to reduce chance for bugs
