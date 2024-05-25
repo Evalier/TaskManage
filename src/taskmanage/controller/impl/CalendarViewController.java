@@ -51,7 +51,7 @@ public class CalendarViewController implements ControllerInterface {
     }
 
     @FXML
-    private void handleRefresh() {
+    public void handleRefresh() {
         loadTasks();
     }
 
@@ -60,7 +60,7 @@ public class CalendarViewController implements ControllerInterface {
         taskTable.getItems().setAll(tasks);
     }
 
-    private List<Task> fetchAllTasks() {
+    public List<Task> fetchAllTasks() {
         List<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM tasks";
         try (Connection connection = dbConnector.getConnection();

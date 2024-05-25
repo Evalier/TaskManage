@@ -53,7 +53,7 @@ public class HomeDashboardController implements ControllerInterface {
     }
 
     @FXML
-    private void handleRefresh() {
+    public void handleRefresh() {
         loadTasks();
     }
 
@@ -73,7 +73,7 @@ public class HomeDashboardController implements ControllerInterface {
         summaryLabel.setText(String.format("Task Summary: %d completed, %d pending", completedTasks, pendingTasks));
     }
 
-    private List<Task> fetchAllTasks() {
+    public List<Task> fetchAllTasks() {
         List<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM tasks";
         try (Connection connection = dbConnector.getConnection();

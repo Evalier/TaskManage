@@ -3,6 +3,7 @@ package taskmanage.controller.impl;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import taskmanage.constants.EnumsAndConstants;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.impl.DataValidator;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class TaskCreationController {
     @FXML private TextField taskNameField;
@@ -62,6 +64,29 @@ public class TaskCreationController {
         showAlert(Alert.AlertType.INFORMATION, "Task created successfully.");
         closeWindow();
     }
+
+    public void handleSaveTask(String name, String description, String dueDate, EnumsAndConstants.PriorityLevel priority, List<String> tags) {
+        HashSet<String> tagSet = new HashSet<>(tags);
+
+        // Validate inputs
+        if (!DataValidator.validateString(name) ||
+                !DataValidator.validateString(description) ||
+                dueDate == null ||
+                !tagSet.stream().allMatch(DataValidator::validateTag)) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input. Please check your data.");
+            return;
+        }
+
+        // Create and add task
+        Task task = new Task(name, description, dueDate, priority);
+        for (String tag : tagSet) {
+            task.addTag(tag.trim());
+        }
+        addTaskToDatabase(task);
+        showAlert(Alert.AlertType.INFORMATION, "Task created successfully.");
+        closeWindow();
+    }
+
 
     private void addTaskToDatabase(Task task) {
         String query = "INSERT INTO tasks (name, description, dueDate, priority) VALUES (?, ?, ?, ?)";

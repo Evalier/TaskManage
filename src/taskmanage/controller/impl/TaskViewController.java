@@ -90,7 +90,7 @@ public class TaskViewController implements ControllerInterface {
         taskTable.getItems().addAll(tasks);
     }
 
-    private void deleteTaskFromDatabase(int taskId) {
+    public void deleteTaskFromDatabase(int taskId) {
         String query = "DELETE FROM tasks WHERE id = " + taskId;
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -101,11 +101,11 @@ public class TaskViewController implements ControllerInterface {
     }
 
     @FXML
-    private void handleRefresh() {
+    public void handleRefresh() {
         loadTasks();
     }
 
-    private List<Task> fetchTasks() {
+    public List<Task> fetchTasks() {
         List<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM tasks";
         try (Connection connection = dbConnector.getConnection();
