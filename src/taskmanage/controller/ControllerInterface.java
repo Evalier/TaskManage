@@ -1,8 +1,9 @@
 package taskmanage.controller;
 
+import javafx.event.ActionEvent;
+
 public interface ControllerInterface {
     void initialize();
-
-    // void handleActionEvent(ActionEvent event);
-    // Add any other common methods needed by all controllers
+    void handleActionEvent(ActionEvent event);
+    // Add other common methods as needed
 }
