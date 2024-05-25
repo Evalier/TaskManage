@@ -1,0 +1,20 @@
+The following things are what is needed to properly compile and run the TaskManage project:
+
+Download MySQL ConnectorJ and JavaFX
+    *scenebuilder is optional for JavaFX but very useful
+    *when you extract the folders, it's probably easist to put them in the same folder
+Change Project Structure
+    *go to file->Project Structure->libraries-> click '+'
+    *name library whatever you want, and add the lib folders of both ConnectorJ and JavaFX to it
+    *Go to modules section
+    *In dependencies tab, make sure to select the library
+    *go to sources and make sure the resources folder is marked as a resources root
+Edit Configurations
+    *Make a new application, I just called mine TaskManage
+    *add taskmanage.main.Main in the main text box
+    *go to modify options, then add VM options
+    *now properly add JavaFX functionality
+        *add the path to the JavaFX lib and select chosen modules
+        --module-path path/to/lib/folder --add-modules javafx.controls,javafx.fxml
+
+Rebuild and Restart IntelliJ IDEA if Necessary
