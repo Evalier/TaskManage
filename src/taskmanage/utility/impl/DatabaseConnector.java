@@ -1,6 +1,6 @@
 package taskmanage.utility.impl;
 
-import taskmanage.model.User;
+import taskmanage.model.impl.User;
 
 import java.io.FileWriter;
 import java.io.IOException;

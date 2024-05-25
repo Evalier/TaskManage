@@ -6,8 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
-import taskmanage.controller.TaskViewController;
-import taskmanage.model.Task;
+import taskmanage.controller.impl.TaskViewController;
+import taskmanage.model.impl.Task;
 
 public class Main extends Application {
 

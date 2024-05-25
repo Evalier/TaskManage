@@ -3,8 +3,8 @@ package taskmanage.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import taskmanage.controller.TaskController;
-import taskmanage.model.Task;
+import taskmanage.controller.impl.TaskController;
+import taskmanage.model.impl.Task;
 
 public class HomeDashboard extends JFrame {
     private TaskController taskController;

@@ -1,8 +1,9 @@
 package taskmanage.ui;
 
-import taskmanage.controller.TaskController;
+import taskmanage.controller.impl.TaskController;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
-import taskmanage.model.Task;
+import taskmanage.model.impl.Task;
+import taskmanage.utility.impl.DataValidator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,13 +85,13 @@ public class TaskCreation extends JFrame {
         HashSet<String> tags = new HashSet<>(Arrays.asList(tagsArray));
 
         // Validate inputs
-        if (!taskmanage.utility.DataValidator.validateString(name) ||
-                !taskmanage.utility.DataValidator.validateString(description) ||
-                !taskmanage.utility.DataValidator.validateDate(dueDate) ||
-                !tags.stream().allMatch(taskmanage.utility.DataValidator::validateTag)) {
-            JOptionPane.showMessageDialog(this, "Invalid input. Please check your data.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+      //  if (!taskmanage.utility.DataValidator.validateString(name)) {
+      //      JOptionPane.showMessageDialog(this, "Invalid input. Please check your data.", "Error", JOptionPane.ERROR_MESSAGE);
+        //    return;
+      //  } else if (!taskmanage.utility.DataValidator.validateString(description) || !taskmanage.utility.DataValidator.validateDate(dueDate) || !tags.stream().allMatch(taskmanage.utility.DataValidator::validateTag)) {
+      //      JOptionPane.showMessageDialog(this, "Invalid input. Please check your data.", "Error", JOptionPane.ERROR_MESSAGE);
+      //      return;
+      //  }
 
         // Create and add task
         Task task = new Task(name, description, dueDate, priority);
