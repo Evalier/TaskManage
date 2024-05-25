@@ -11,6 +11,7 @@ import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.utility.facades.UtilityFacade;
 
 import javafx.event.ActionEvent;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeDashboardController implements ControllerInterface {
@@ -31,11 +33,11 @@ public class HomeDashboardController implements ControllerInterface {
     @FXML private TableColumn<Task, String> tagsColumn;
     @FXML private Button refreshButton;  // Linking the refresh button from FXML
 
-    private static DatabaseConnector dbConnector;
+    private static UtilityFacade dbConnector;
 
     public HomeDashboardController() {
         if (dbConnector == null) {
-            dbConnector = new DatabaseConnector();
+            dbConnector = new UtilityFacade();
         }
     }
 
@@ -76,7 +78,7 @@ public class HomeDashboardController implements ControllerInterface {
     public List<Task> fetchAllTasks() {
         List<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM tasks";
-        try (Connection connection = dbConnector.getConnection();
+        try (Connection connection = dbConnector.connectToDatabase();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
@@ -89,7 +91,7 @@ public class HomeDashboardController implements ControllerInterface {
                 );
                 // Set additional fields if necessary
                 task.setStatus(EnumsAndConstants.TaskStatus.valueOf(resultSet.getString("status")));
-                task.setTags(resultSet.getString("tags"));
+                task.setTags(Collections.singleton(resultSet.getString("tags")));
                 tasks.add(task);
             }
         } catch (SQLException e) {

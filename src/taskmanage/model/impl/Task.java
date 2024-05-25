@@ -2,7 +2,7 @@ package taskmanage.model.impl;
 
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.constants.EnumsAndConstants.TaskStatus;
-import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.utility.facades.UtilityFacade;
 import taskmanage.model.interfaces.ModelInterface;
 
 import java.util.ArrayList;
@@ -10,31 +10,42 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 public class Task implements ModelInterface {
-    private int id;  // Added id field
+    private int id;
     private String name;
     private String description;
     private String dueDate;
     private String completionDate;
     private PriorityLevel priority;
     private TaskStatus status;
-    private List<SubTask> subTasks;
-    private Set<String> tags; // New field for tags
+    private List<SubTask> subTasks = new ArrayList<>();
+    private Set<String> tags = new HashSet<>();
 
-    // no argument constructor
+    // No-parameter constructor
     public Task() {
-        // Initialize tags to avoid null pointer issues
-        tags = new HashSet<>();
+        this.subTasks = new ArrayList<>();
+        this.tags = new HashSet<>();
     }
 
     // Constructor
+    public Task(int id, String name, String description, String dueDate, String completionDate, PriorityLevel priority, TaskStatus status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.completionDate = completionDate;
+        this.priority = priority;
+        this.status = status;
+        this.subTasks = new ArrayList<>();
+        this.tags = new HashSet<>();
+    }
+
+    // Another constructor matching the usage in CalendarViewController
     public Task(String name, String description, String dueDate, PriorityLevel priority) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.status = TaskStatus.PENDING;  // Default status
         this.subTasks = new ArrayList<>();
         this.tags = new HashSet<>();
     }
@@ -104,8 +115,27 @@ public class Task implements ModelInterface {
         return tags;
     }
 
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
     public void addTag(String tag) {
         tags.add(tag);
+    }
+
+    public void updateStatus(Task task) {
+        boolean allSubTasksComplete = true;
+        for (SubTask subTask : task.getSubTasks()) {
+            if (subTask.getStatus() != TaskStatus.COMPLETE) {
+                allSubTasksComplete = false;
+                break;
+            }
+        }
+        if (allSubTasksComplete) {
+            task.setStatus(TaskStatus.COMPLETE);
+        } else {
+            task.setStatus(TaskStatus.PENDING);
+        }
     }
 
     public void removeTag(String tag) {
@@ -123,8 +153,7 @@ public class Task implements ModelInterface {
 
     @Override
     public boolean validate() {
-        // Basic validation logic
-        return true; // Replace with actual validation logic for your class
+        return true; // Add actual validation logic
     }
 
     @Override
@@ -134,33 +163,17 @@ public class Task implements ModelInterface {
             return;
         }
 
-        DatabaseConnector dbConnector = new DatabaseConnector();
-        String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
+        UtilityFacade dbConnector = new UtilityFacade();
+        String query = "INSERT INTO tasks (name, description, dueDate, completionDate, priority, status) VALUES (values)"; // Replace with actual table name and fields
         dbConnector.executeUpdate(query);
         System.out.println("Record saved.");
-    }
-
-
-    // Method to update task status based on subtask completion
-    public void updateStatus() {
-        boolean allSubTasksComplete = true;
-        for (SubTask subTask : subTasks) {
-            if (subTask.getStatus() != TaskStatus.COMPLETE) {
-                allSubTasksComplete = false;
-                break;
-            }
-        }
-        if (allSubTasksComplete) {
-            this.status = TaskStatus.COMPLETE;
-        } else {
-            this.status = TaskStatus.PENDING;
-        }
     }
 
     @Override
     public String toString() {
         return "Task{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", dueDate='" + dueDate + '\'' +
                 ", completionDate='" + completionDate + '\'' +
@@ -170,7 +183,5 @@ public class Task implements ModelInterface {
                 ", tags=" + tags +
                 '}';
     }
-
-    public void setTags(String tags) {
-    }
 }
+

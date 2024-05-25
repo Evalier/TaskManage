@@ -3,15 +3,26 @@ package taskmanage.model.facades;
 import taskmanage.constants.EnumsAndConstants;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.model.impl.*;
+import taskmanage.utility.facades.UtilityFacade;
 
 import java.time.LocalDateTime;
 
 public class ModelFacade {
 
-    public Task createTask(String name, String description, String dueDate, PriorityLevel priority) {
-        Task task = new Task(name, description, dueDate, priority);
-        task.save();
-        return task;
+    public Task currentTask;
+    public SubTask  currentSubTask;
+    public CalendarModel currentCalendarModel;
+    public Habit currentHabit;
+    public Reminder currentReminder;
+    public User currentUser;
+
+    public UtilityFacade utilityFacade;
+
+    // Methods to manage Task
+    public Task createTask(int id, String name, String description, String dueDate, String completionDate, PriorityLevel priority, EnumsAndConstants.TaskStatus status) {
+        currentTask = new Task(id, name, description, dueDate, completionDate, priority, status);
+        currentTask.save();
+        return currentTask;
     }
 
     public boolean validateTask(Task task) {
@@ -23,7 +34,7 @@ public class ModelFacade {
     }
 
     public void updateTaskStatus(Task task) {
-        task.updateStatus();
+        task.updateStatus(task);
     }
 
     public void addTagToTask(Task task, String tag) {
@@ -46,32 +57,34 @@ public class ModelFacade {
         task.setCompletionDate(completionDate);
     }
 
-    public SubTask createSubTask(String name, String description, String dueDate, PriorityLevel priority) {
-        SubTask subTask = new SubTask(name, description, dueDate, priority);
-        subTask.save();
-        return subTask;
-    }
 
-    public boolean validateSubTask(SubTask subTask) {
-        return subTask.validate();
-    }
+        public SubTask createSubTask(int id, String name, String description, String dueDate, PriorityLevel priority, EnumsAndConstants.TaskStatus status) {
+            currentSubTask = new SubTask(id, name, description, dueDate, priority, status);
+            currentSubTask.save();
+            return currentSubTask;
+        }
 
-    public void saveSubTask(SubTask subTask) {
-        subTask.save();
-    }
+        public boolean validateSubTask(SubTask subTask) {
+            return subTask.validate();
+        }
 
-    public void updateSubTaskStatus(SubTask subTask, EnumsAndConstants.TaskStatus status) {
-        subTask.setStatus(status);
-    }
+        public void saveSubTask(SubTask subTask) {
+            subTask.save();
+        }
 
-    //public void setSubTaskCompletionDate(SubTask subTask, String completionDate) {
-    //    subTask.setCompletionDate(completionDate);
-    //}
+        public void updateSubTaskStatus(SubTask subTask, EnumsAndConstants.TaskStatus status) {
+            subTask.setStatus(status);
+        }
+
+        // Other code sections remain unchanged...
+
+
+
 
     public Reminder createReminder(Task task, LocalDateTime reminderTime) {
-        Reminder reminder = new Reminder(task, reminderTime);
-        reminder.save();
-        return reminder;
+        currentReminder = new Reminder(task, reminderTime);
+        currentReminder.save();
+        return currentReminder;
     }
 
     public boolean validateReminder(Reminder reminder) {
@@ -91,9 +104,9 @@ public class ModelFacade {
     }
 
     public Habit createHabit(String name, int occurrences) {
-        Habit habit = new Habit(name, occurrences);
-        habit.save();
-        return habit;
+        currentHabit = new Habit(name, occurrences);
+        currentHabit.save();
+        return currentHabit;
     }
 
     public boolean validateHabit(Habit habit) {
@@ -117,9 +130,9 @@ public class ModelFacade {
     }
 
     public CalendarModel createCalendarModel() {
-        CalendarModel calendarModel = new CalendarModel();
-        calendarModel.save();
-        return calendarModel;
+        currentCalendarModel = new CalendarModel();
+        currentCalendarModel.save();
+        return currentCalendarModel;
     }
 
     public boolean validateCalendarModel(CalendarModel calendarModel) {
@@ -129,5 +142,34 @@ public class ModelFacade {
     public void saveCalendarModel(CalendarModel calendarModel) {
         calendarModel.save();
     }
+
+    public User createUser(String username, String password, byte[] salt, UtilityFacade securityManager) {
+        currentUser = new User(username, password, salt, securityManager);
+        currentUser.save();
+        return currentUser;
+    }
+
+    public boolean validateUser(User user) {
+        return user.validate();
+    }
+
+    public void saveUser(User user) {
+        user.save();
+    }
+
+    public void updateUserPassword(User user, String newPassword) {
+        byte[] newSalt = utilityFacade.generateSalt();
+        user.setSalt(newSalt);
+        user.setHashedPassword(utilityFacade.hashPasswordWithSalt(user.getUsername(), newPassword, newSalt));
+    }
+
+    public void updateUserUsername(User user, String newUsername) {
+        user.setUsername(newUsername);
+    }
+
+    public String getUserDetails(User user) {
+        return user.toString();
+    }
 }
+
 

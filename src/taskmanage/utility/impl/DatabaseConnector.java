@@ -36,12 +36,19 @@ public class DatabaseConnector {
 
     // Method to return the database connection
     public Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Failed to establish database connection", e);
+        }
         return connection;
     }
 
     // Method to execute an update (INSERT, UPDATE, DELETE)
     public void executeUpdate(String query) {
-        try (Statement statement = connection.createStatement()) {
+        try (Statement statement = getConnection().createStatement()) {
             statement.executeUpdate(query);
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Failed to execute update", e);
@@ -50,7 +57,7 @@ public class DatabaseConnector {
 
     // Method to execute a query (SELECT)
     public ResultSet executeQuery(String query) {
-        try (Statement statement = connection.createStatement()) {
+        try (Statement statement = getConnection().createStatement()) {
             return statement.executeQuery(query);
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Failed to execute query", e);
@@ -61,7 +68,7 @@ public class DatabaseConnector {
     // Method to add a user to the database
     public void addUser(User user) {
         String query = "INSERT INTO users (username, hashedPassword, salt) VALUES (?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getHashedPassword());
             preparedStatement.setBytes(3, user.getSalt());
@@ -77,6 +84,7 @@ public class DatabaseConnector {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
+                LOGGER.log(Level.INFO, "Database connection closed");
             }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Failed to close database connection", e);
@@ -85,9 +93,8 @@ public class DatabaseConnector {
 
     // Method to backup data to a file
     public void backupData(String backupFilePath) {
-        try (FileWriter writer = new FileWriter(backupFilePath)) {
-            String query = "SELECT * FROM tasks";
-            ResultSet resultSet = executeQuery(query);
+        try (FileWriter writer = new FileWriter(backupFilePath);
+             ResultSet resultSet = executeQuery("SELECT * FROM tasks")) {
             while (resultSet.next()) {
                 String taskData = resultSet.getInt("id") + ", " +
                         resultSet.getString("name") + ", " +
@@ -104,4 +111,5 @@ public class DatabaseConnector {
         }
     }
 }
+
 

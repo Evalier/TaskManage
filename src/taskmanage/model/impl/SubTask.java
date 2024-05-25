@@ -2,10 +2,13 @@ package taskmanage.model.impl;
 
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.constants.EnumsAndConstants.TaskStatus;
+import taskmanage.utility.facades.UtilityFacade;
 import taskmanage.utility.impl.DatabaseConnector;
 import taskmanage.model.interfaces.ModelInterface;
 
 public class SubTask implements ModelInterface {
+
+    private int id;
     private String name;
     private String description;
     private String dueDate;
@@ -13,11 +16,13 @@ public class SubTask implements ModelInterface {
     private TaskStatus status;
 
     // Constructor
-    public SubTask (String name, String description, String dueDate, PriorityLevel priority) {
+    public SubTask (int id, String name, String description, String dueDate, PriorityLevel priority, TaskStatus status) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+
         this.status = TaskStatus.PENDING;  // Default status
     }
 
@@ -75,7 +80,7 @@ public class SubTask implements ModelInterface {
             return;
         }
 
-        DatabaseConnector dbConnector = new DatabaseConnector();
+        UtilityFacade dbConnector = new UtilityFacade();
         String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
         dbConnector.executeUpdate(query);
         System.out.println("Record saved.");

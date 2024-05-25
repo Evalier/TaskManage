@@ -2,6 +2,7 @@ package taskmanage.model.impl;
 
 import taskmanage.utility.impl.DatabaseConnector;
 import taskmanage.model.interfaces.ModelInterface;
+import taskmanage.utility.facades.UtilityFacade;
 
 import java.time.LocalDateTime;
 
@@ -45,7 +46,7 @@ public class Reminder implements ModelInterface {
             return;
         }
 
-        DatabaseConnector dbConnector = new DatabaseConnector();
+        UtilityFacade dbConnector = new UtilityFacade();
         String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
         dbConnector.executeUpdate(query);
         System.out.println("Record saved.");

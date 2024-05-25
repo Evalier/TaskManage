@@ -5,6 +5,7 @@ import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.impl.DataValidator;
 import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.utility.facades.UtilityFacade;
 
 import javafx.event.ActionEvent;
 import java.sql.ResultSet;
@@ -13,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskController implements ControllerInterface {
-    private DatabaseConnector databaseConnector;
+    private UtilityFacade databaseConnector;
 
     // Constructor
     public TaskController() {
-        this.databaseConnector = new DatabaseConnector();
+        this.databaseConnector = new UtilityFacade();
         System.out.println("TaskController initialized");
     }
 

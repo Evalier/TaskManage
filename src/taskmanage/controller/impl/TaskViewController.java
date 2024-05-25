@@ -8,9 +8,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import taskmanage.constants.EnumsAndConstants;
+import taskmanage.constants.EnumsAndConstants.PriorityLevel;
+import taskmanage.constants.EnumsAndConstants.TaskStatus;
 import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
-import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.utility.facades.UtilityFacade;
 
 import javafx.event.ActionEvent;
 import java.sql.Connection;
@@ -20,6 +22,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TaskViewController implements ControllerInterface {
     @FXML private Label nameLabel;
@@ -31,11 +34,11 @@ public class TaskViewController implements ControllerInterface {
     @FXML private TableView<Task> taskTable;
 
     private Task task;
-    private static DatabaseConnector dbConnector;
+    private static UtilityFacade dbConnector;
 
     public TaskViewController() {
         if (dbConnector == null) {
-            dbConnector = new DatabaseConnector();
+            dbConnector = new UtilityFacade();
         }
     }
 
@@ -60,7 +63,7 @@ public class TaskViewController implements ControllerInterface {
         descriptionArea.setText(task.getDescription());
         dueDateLabel.setText(task.getDueDate());
         priorityLabel.setText(task.getPriority().toString());
-        statusLabel.setText(task.getStatus().toString());
+        statusLabel.setText(task.getStatus() != null ? task.getStatus().toString() : "No Status");
         tagsLabel.setText(String.join(", ", task.getTags()));
     }
 
@@ -91,9 +94,10 @@ public class TaskViewController implements ControllerInterface {
     }
 
     public void deleteTaskFromDatabase(int taskId) {
-        String query = "DELETE FROM tasks WHERE id = " + taskId;
-        try (Connection connection = dbConnector.getConnection();
+        String query = "DELETE FROM tasks WHERE id = ?";
+        try (Connection connection = dbConnector.connectToDatabase();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, taskId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,18 +112,32 @@ public class TaskViewController implements ControllerInterface {
     public List<Task> fetchTasks() {
         List<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM tasks";
-        try (Connection connection = dbConnector.getConnection();
+        try (Connection connection = dbConnector.connectToDatabase();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
                 Task task = new Task();
+                task.setID(resultSet.getInt("id"));
                 task.setName(resultSet.getString("name"));
                 task.setDescription(resultSet.getString("description"));
                 task.setDueDate(resultSet.getString("dueDate"));
-                task.setPriority(EnumsAndConstants.PriorityLevel.valueOf(resultSet.getString("priority")));
-                task.setStatus(EnumsAndConstants.TaskStatus.valueOf(resultSet.getString("status")));
-                task.setTags(String.valueOf(new HashSet<>(List.of(resultSet.getString("tags").split(",")))));
+                task.setPriority(PriorityLevel.valueOf(resultSet.getString("priority")));
+
+                // Handle potential null values
+                String statusStr = resultSet.getString("status");
+                if (statusStr != null) {
+                    task.setStatus(TaskStatus.valueOf(statusStr));
+                } else {
+                    task.setStatus(TaskStatus.PENDING); // or any default value
+                }
+
+                String tagsStr = resultSet.getString("tags");
+                if (tagsStr != null && !tagsStr.isEmpty()) {
+                    Set<String> tags = new HashSet<>(List.of(tagsStr.split(",")));
+                    task.setTags(tags);
+                }
+
                 tasks.add(task);
             }
         } catch (SQLException e) {
@@ -139,3 +157,4 @@ public class TaskViewController implements ControllerInterface {
         alert.showAndWait();
     }
 }
+

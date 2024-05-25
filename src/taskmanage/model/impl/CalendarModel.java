@@ -1,6 +1,6 @@
 package taskmanage.model.impl;
 
-import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.utility.facades.UtilityFacade;
 import taskmanage.model.interfaces.ModelInterface;
 
 public class CalendarModel implements ModelInterface {
@@ -24,7 +24,7 @@ public class CalendarModel implements ModelInterface {
             return;
         }
 
-        DatabaseConnector dbConnector = new DatabaseConnector();
+        UtilityFacade dbConnector = new UtilityFacade();
         String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
         dbConnector.executeUpdate(query);
         System.out.println("Record saved.");

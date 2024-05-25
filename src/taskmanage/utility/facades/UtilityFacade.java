@@ -72,12 +72,13 @@ public class UtilityFacade {
         return securityManager.generateSalt();
     }
 
-    public String hashPasswordWithSalt(String password, byte[] salt) {
-        return securityManager.hashPasswordWithSalt(password, salt);
+    public String hashPasswordWithSalt(String username, String password, byte[] salt) {
+        return securityManager.hashPasswordWithSalt(username, password, salt);
     }
 
-    public boolean verifyPassword(String password, String hashedPassword, byte[] salt) {
-        return securityManager.verifyPassword(password, hashedPassword, salt);
+    public boolean verifyPassword(String username, String password, String hashedPassword, byte[] salt) {
+        return securityManager.verifyPassword(username, password, hashedPassword, salt);
     }
 }
+
 

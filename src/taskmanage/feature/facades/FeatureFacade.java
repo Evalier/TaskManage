@@ -8,6 +8,7 @@ import taskmanage.model.impl.Habit;
 import taskmanage.model.impl.Reminder;
 import taskmanage.model.impl.Task;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
+import taskmanage.utility.facades.UtilityFacade;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,12 +17,14 @@ public class FeatureFacade {
     private final PriorityManager priorityManager;
     private final ReminderManager reminderManager;
     private final StatisticsManager statisticsManager;
+    private final UtilityFacade utilityFacade;
 
     public FeatureFacade() {
         this.habitTracker = new HabitTracker();
         this.priorityManager = new PriorityManager();
         this.reminderManager = new ReminderManager();
         this.statisticsManager = new StatisticsManager();
+        this.utilityFacade = new UtilityFacade();
     }
 
     // Methods for HabitTracker

@@ -8,6 +8,7 @@ import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.impl.DataValidator;
 import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.utility.facades.UtilityFacade;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,11 +25,11 @@ public class TaskCreationController {
     @FXML private ComboBox<PriorityLevel> priorityComboBox;
     @FXML private TextField tagsField;
 
-    private static DatabaseConnector dbConnector;
+    private static UtilityFacade dbConnector;
 
     public TaskCreationController() {
         if (dbConnector == null) {
-            dbConnector = new DatabaseConnector();
+            dbConnector = new UtilityFacade();
         }
     }
 
@@ -90,7 +91,7 @@ public class TaskCreationController {
 
     private void addTaskToDatabase(Task task) {
         String query = "INSERT INTO tasks (name, description, dueDate, priority) VALUES (?, ?, ?, ?)";
-        try (Connection connection = dbConnector.getConnection();
+        try (Connection connection = dbConnector.connectToDatabase();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, task.getName());
             preparedStatement.setString(2, task.getDescription());
