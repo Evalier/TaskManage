@@ -13,16 +13,25 @@ public class DatabaseConnector {
     private static final String USER = "root";
     private static final String PASSWORD = "cs380";
     private static final Logger LOGGER = Logger.getLogger(DatabaseConnector.class.getName());
+    private static DatabaseConnector instance;
     private Connection connection;
 
-    // Constructor to establish a database connection
-    public DatabaseConnector() {
+    // Private constructor to establish a database connection
+    private DatabaseConnector() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
             LOGGER.log(Level.INFO, "Database connection established");
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Failed to establish database connection", e);
         }
+    }
+
+    // Public method to provide access to the singleton instance
+    public static synchronized DatabaseConnector getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnector();
+        }
+        return instance;
     }
 
     // Method to return the database connection
@@ -95,3 +104,4 @@ public class DatabaseConnector {
         }
     }
 }
+
