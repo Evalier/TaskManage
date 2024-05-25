@@ -1,9 +1,11 @@
-package taskmanage.model;
+package taskmanage.model.impl;
 
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.constants.EnumsAndConstants.TaskStatus;
+import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.model.interfaces.ModelInterface;
 
-public class SubTask {
+public class SubTask implements ModelInterface {
     private String name;
     private String description;
     private String dueDate;
@@ -11,7 +13,7 @@ public class SubTask {
     private TaskStatus status;
 
     // Constructor
-    public SubTask(String name, String description, String dueDate, PriorityLevel priority) {
+    public SubTask (String name, String description, String dueDate, PriorityLevel priority) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
@@ -59,6 +61,26 @@ public class SubTask {
     public void setStatus(TaskStatus status) {
         this.status = status;
     }
+
+    @Override
+    public boolean validate() {
+        // Basic validation logic
+        return true; // Replace with actual validation logic for your class
+    }
+
+    @Override
+    public void save() {
+        if (!validate()) {
+            System.out.println("Validation failed. Cannot save.");
+            return;
+        }
+
+        DatabaseConnector dbConnector = new DatabaseConnector();
+        String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
+        dbConnector.executeUpdate(query);
+        System.out.println("Record saved.");
+    }
+
 
     @Override
     public String toString() {

@@ -1,20 +1,33 @@
-package taskmanage.feature;
+package taskmanage.feature.impl;
 
 import taskmanage.constants.EnumsAndConstants;
-import taskmanage.constants.EnumsAndConstants.PriorityLevel;
-import taskmanage.constants.EnumsAndConstants.TaskStatus;
-import taskmanage.model.Task;
+import taskmanage.feature.interfaces.FeatureInterface;
+import taskmanage.model.impl.Task;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatisticsManager {
+public class StatisticsManager implements FeatureInterface {
     private List<Task> tasks;
 
     // Constructor
     public StatisticsManager() {
         this.tasks = new ArrayList<>();
+    }
+
+    @Override
+    public void initialize() {
+        // Initialization logic for StatisticsManager
+        System.out.println("Initializing StatisticsManager...");
+        // Any necessary setup code can go here
+    }
+
+    @Override
+    public void executeFeature() {
+        // Execution logic for StatisticsManager feature
+        System.out.println("Executing StatisticsManager feature...");
+        System.out.println(generateStatisticsReport());
     }
 
     // Method to add a task to the statistics manager
@@ -41,7 +54,7 @@ public class StatisticsManager {
             if (task.getStatus() == EnumsAndConstants.TaskStatus.COMPLETE) {
                 // Assuming dueDate and completionDate are in a format that can be parsed into LocalDate
                 LocalDate dueDate = LocalDate.parse(task.getDueDate());
-                LocalDate completionDate = LocalDate.parse(task.getCompletionDate()); // You need to add completionDate to Task class
+                LocalDate completionDate = LocalDate.parse(task.getCompletionDate());
                 totalCompletionTime += ChronoUnit.DAYS.between(dueDate, completionDate);
                 completedTasks++;
             }
@@ -76,8 +89,6 @@ public class StatisticsManager {
     public void resetStatistics() {
         tasks.clear();
     }
-
-    // Additional methods for more statistics can be added here
 
     @Override
     public String toString() {

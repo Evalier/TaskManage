@@ -1,8 +1,11 @@
-package taskmanage.model;
+package taskmanage.model.impl;
+
+import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.model.interfaces.ModelInterface;
 
 import java.time.LocalDateTime;
 
-public class Reminder {
+public class Reminder implements ModelInterface {
     private Task task;
     private LocalDateTime reminderTime;
 
@@ -28,6 +31,26 @@ public class Reminder {
     public void setReminderTime(LocalDateTime reminderTime) {
         this.reminderTime = reminderTime;
     }
+
+    @Override
+    public boolean validate() {
+        // Basic validation logic
+        return true; // Replace with actual validation logic for your class
+    }
+
+    @Override
+    public void save() {
+        if (!validate()) {
+            System.out.println("Validation failed. Cannot save.");
+            return;
+        }
+
+        DatabaseConnector dbConnector = new DatabaseConnector();
+        String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
+        dbConnector.executeUpdate(query);
+        System.out.println("Record saved.");
+    }
+
 
     @Override
     public String toString() {

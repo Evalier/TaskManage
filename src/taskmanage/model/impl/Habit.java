@@ -1,6 +1,9 @@
-package taskmanage.model;
+package taskmanage.model.impl;
 
-public class Habit {
+import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.model.interfaces.ModelInterface;
+
+public class Habit implements ModelInterface {
     private String name;
     private int occurrences;
 
@@ -26,6 +29,26 @@ public class Habit {
     public void setOccurrences(int occurrences) {
         this.occurrences = occurrences;
     }
+
+    @Override
+    public boolean validate() {
+        // Basic validation logic
+        return true; // Replace with actual validation logic for your class
+    }
+
+    @Override
+    public void save() {
+        if (!validate()) {
+            System.out.println("Validation failed. Cannot save.");
+            return;
+        }
+
+        DatabaseConnector dbConnector = new DatabaseConnector();
+        String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
+        dbConnector.executeUpdate(query);
+        System.out.println("Record saved.");
+    }
+
 
     @Override
     public String toString() {

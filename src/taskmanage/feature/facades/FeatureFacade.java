@@ -1,4 +1,4 @@
-package taskmanage.feature;
+package taskmanage.feature.facades;
 
 public class FeatureFacade {
 }

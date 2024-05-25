@@ -1,9 +1,11 @@
-package taskmanage.model;
-import taskmanage.utility.SecurityManager;
+package taskmanage.model.impl;
+import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.utility.impl.SecurityManager;
+import taskmanage.model.interfaces.ModelInterface;
 
 import java.util.Arrays;
 
-public class User {
+public class User implements ModelInterface {
     private String username;
     private String hashedPassword;
     private byte[] salt;
@@ -39,6 +41,26 @@ public class User {
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
+
+    @Override
+    public boolean validate() {
+        // Basic validation logic
+        return true; // Replace with actual validation logic for your class
+    }
+
+    @Override
+    public void save() {
+        if (!validate()) {
+            System.out.println("Validation failed. Cannot save.");
+            return;
+        }
+
+        DatabaseConnector dbConnector = new DatabaseConnector();
+        String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
+        dbConnector.executeUpdate(query);
+        System.out.println("Record saved.");
+    }
+
 
     @Override
     public String toString() {

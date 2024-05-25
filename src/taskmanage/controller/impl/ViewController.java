@@ -1,10 +1,24 @@
-package taskmanage.controller;
-import taskmanage.model.Task;
-public class ViewController {
+package taskmanage.controller.impl;
+
+import taskmanage.controller.interfaces.ControllerInterface;
+import taskmanage.model.impl.Task;
+import javafx.event.ActionEvent;
+
+public class ViewController implements ControllerInterface {
     // Constructor
     public ViewController() {
         // Initialization code
         System.out.println("ViewController initialized");
+    }
+
+    @Override
+    public void initialize() {
+        // Add any necessary initialization code
+    }
+
+    @Override
+    public void handleActionEvent(ActionEvent event) {
+        // Default implementation
     }
 
     // Example methods that you might have in a controller

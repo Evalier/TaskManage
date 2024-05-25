@@ -1,15 +1,18 @@
-package taskmanage.controller;
+package taskmanage.controller.impl;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import taskmanage.constants.EnumsAndConstants;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
-import taskmanage.model.Task;
-import taskmanage.utility.DatabaseConnector;
+import taskmanage.controller.interfaces.ControllerInterface;
+import taskmanage.model.impl.Task;
+import taskmanage.utility.impl.DatabaseConnector;
 
+import javafx.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeDashboardController {
+public class HomeDashboardController implements ControllerInterface {
     @FXML private Label summaryLabel;
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> nameColumn;
@@ -26,6 +29,7 @@ public class HomeDashboardController {
     @FXML private TableColumn<Task, String> priorityColumn;
     @FXML private TableColumn<Task, String> statusColumn;
     @FXML private TableColumn<Task, String> tagsColumn;
+    @FXML private Button refreshButton;  // Linking the refresh button from FXML
 
     private static DatabaseConnector dbConnector;
 
@@ -35,6 +39,7 @@ public class HomeDashboardController {
         }
     }
 
+    @Override
     @FXML
     public void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -51,6 +56,12 @@ public class HomeDashboardController {
     private void handleRefresh() {
         loadTasks();
     }
+
+    @Override
+    public void handleActionEvent(ActionEvent event) {
+        // Default implementation, if needed
+    }
+
 
     private void loadTasks() {
         List<Task> tasks = fetchAllTasks();

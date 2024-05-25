@@ -1,4 +1,4 @@
-package taskmanage.controller;
+package taskmanage.controller.interfaces;
 
 import javafx.event.ActionEvent;
 

@@ -1,14 +1,17 @@
-package taskmanage.model;
+package taskmanage.model.impl;
 
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.constants.EnumsAndConstants.TaskStatus;
+import taskmanage.utility.impl.DatabaseConnector;
+import taskmanage.model.interfaces.ModelInterface;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 
-public class Task {
+public class Task implements ModelInterface {
     private int id;  // Added id field
     private String name;
     private String description;
@@ -117,6 +120,26 @@ public class Task {
     public void removeSubTask(SubTask subTask) {
         this.subTasks.remove(subTask);
     }
+
+    @Override
+    public boolean validate() {
+        // Basic validation logic
+        return true; // Replace with actual validation logic for your class
+    }
+
+    @Override
+    public void save() {
+        if (!validate()) {
+            System.out.println("Validation failed. Cannot save.");
+            return;
+        }
+
+        DatabaseConnector dbConnector = new DatabaseConnector();
+        String query = "INSERT INTO tablename (fields) VALUES (values)"; // Replace with actual table name and fields
+        dbConnector.executeUpdate(query);
+        System.out.println("Record saved.");
+    }
+
 
     // Method to update task status based on subtask completion
     public void updateStatus() {

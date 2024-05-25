@@ -1,16 +1,31 @@
-package taskmanage.feature;
+package taskmanage.feature.impl;
 
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
-import taskmanage.model.Task;
+import taskmanage.feature.interfaces.FeatureInterface;
+import taskmanage.model.impl.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PriorityManager {
+public class PriorityManager implements FeatureInterface {
     private List<Task> tasks;
 
     // Constructor
     public PriorityManager() {
         this.tasks = new ArrayList<>();
+    }
+
+    @Override
+    public void initialize() {
+        // Initialization logic for PriorityManager
+        System.out.println("Initializing PriorityManager...");
+        // Any necessary setup code can go here
+    }
+
+    @Override
+    public void executeFeature() {
+        // Execution logic for PriorityManager feature
+        System.out.println("Executing PriorityManager feature...");
+        displayTasksByPriority();
     }
 
     // Method to set task priority
@@ -57,4 +72,3 @@ public class PriorityManager {
                 '}';
     }
 }
-

@@ -1,15 +1,31 @@
-package taskmanage.feature;
-import taskmanage.model.Habit;
+package taskmanage.feature.impl;
+
+import taskmanage.feature.interfaces.FeatureInterface;
+import taskmanage.model.impl.Habit;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HabitTracker {
+public class HabitTracker implements FeatureInterface {
     private List<Habit> habits;
 
     // Constructor
     public HabitTracker() {
         this.habits = new ArrayList<>();
+    }
+
+    @Override
+    public void initialize() {
+        // Initialization logic for HabitTracker
+        System.out.println("Initializing HabitTracker...");
+        // Any necessary setup code can go here
+    }
+
+    @Override
+    public void executeFeature() {
+        // Execution logic for HabitTracker feature
+        System.out.println("Executing HabitTracker feature...");
+        analyzeHabits();
     }
 
     // Method to add a habit to the tracker

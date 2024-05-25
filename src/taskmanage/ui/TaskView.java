@@ -1,7 +1,7 @@
 package taskmanage.ui;
 
-import taskmanage.controller.TaskController;
-import taskmanage.model.Task;
+import taskmanage.controller.impl.TaskController;
+import taskmanage.model.impl.Task;
 
 import javax.swing.*;
 import java.awt.*;

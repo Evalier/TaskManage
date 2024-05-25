@@ -1,21 +1,34 @@
-package taskmanage.controller;
+package taskmanage.controller.impl;
 
 import taskmanage.constants.EnumsAndConstants;
-import taskmanage.model.Task;
-import taskmanage.utility.DataValidator;
-import taskmanage.utility.DatabaseConnector;
+import taskmanage.controller.interfaces.ControllerInterface;
+import taskmanage.model.impl.Task;
+import taskmanage.utility.impl.DataValidator;
+import taskmanage.utility.impl.DatabaseConnector;
+
+import javafx.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskController {
+public class TaskController implements ControllerInterface {
     private DatabaseConnector databaseConnector;
 
     // Constructor
     public TaskController() {
         this.databaseConnector = new DatabaseConnector();
         System.out.println("TaskController initialized");
+    }
+
+    @Override
+    public void initialize() {
+        // Add any necessary initialization code
+    }
+
+    @Override
+    public void handleActionEvent(ActionEvent event) {
+        // Default implementation
     }
 
     // Method to add a task to the system

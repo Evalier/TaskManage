@@ -1,4 +1,4 @@
-package taskmanage.controller;
+package taskmanage.controller.impl;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -8,9 +8,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import taskmanage.constants.EnumsAndConstants;
-import taskmanage.model.Task;
-import taskmanage.utility.DatabaseConnector;
+import taskmanage.controller.interfaces.ControllerInterface;
+import taskmanage.model.impl.Task;
+import taskmanage.utility.impl.DatabaseConnector;
 
+import javafx.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class TaskViewController {
+public class TaskViewController implements ControllerInterface {
     @FXML private Label nameLabel;
     @FXML private TextArea descriptionArea;
     @FXML private Label dueDateLabel;
@@ -35,6 +37,17 @@ public class TaskViewController {
         if (dbConnector == null) {
             dbConnector = new DatabaseConnector();
         }
+    }
+
+    @Override
+    @FXML
+    public void initialize() {
+        // Add any necessary initialization code
+    }
+
+    @Override
+    public void handleActionEvent(ActionEvent event) {
+        // Default implementation
     }
 
     public void setTask(Task task) {

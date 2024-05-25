@@ -1,12 +1,12 @@
-package taskmanage.controller;
+package taskmanage.controller.impl;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
-import taskmanage.model.Task;
-import taskmanage.utility.DataValidator;
-import taskmanage.utility.DatabaseConnector;
+import taskmanage.model.impl.Task;
+import taskmanage.utility.impl.DataValidator;
+import taskmanage.utility.impl.DatabaseConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

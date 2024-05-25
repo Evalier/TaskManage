@@ -1,17 +1,32 @@
-package taskmanage.feature;
+package taskmanage.feature.impl;
 
-import taskmanage.model.Reminder;
-import taskmanage.model.Task;
+import taskmanage.feature.interfaces.FeatureInterface;
+import taskmanage.model.impl.Reminder;
+import taskmanage.model.impl.Task;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReminderManager {
+public class ReminderManager implements FeatureInterface {
     private List<Reminder> reminders;
 
     // Constructor
     public ReminderManager() {
         this.reminders = new ArrayList<>();
+    }
+
+    @Override
+    public void initialize() {
+        // Initialization logic for ReminderManager
+        System.out.println("Initializing ReminderManager...");
+        // Any necessary setup code can go here
+    }
+
+    @Override
+    public void executeFeature() {
+        // Execution logic for ReminderManager feature
+        System.out.println("Executing ReminderManager feature...");
+        checkReminders();
     }
 
     // Method to set reminders for tasks
@@ -58,3 +73,4 @@ public class ReminderManager {
                 '}';
     }
 }
+

@@ -1,13 +1,15 @@
-package taskmanage.controller;
+package taskmanage.controller.impl;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import taskmanage.constants.EnumsAndConstants;
-import taskmanage.model.Task;
-import taskmanage.utility.DatabaseConnector;
+import taskmanage.controller.interfaces.ControllerInterface;
+import taskmanage.model.impl.Task;
+import taskmanage.utility.impl.DatabaseConnector;
 
+import javafx.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarViewController {
+public class CalendarViewController implements ControllerInterface {
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> nameColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
@@ -31,6 +33,7 @@ public class CalendarViewController {
         }
     }
 
+    @Override
     @FXML
     public void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -40,6 +43,11 @@ public class CalendarViewController {
         tagsColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
 
         loadTasks();
+    }
+
+    @Override
+    public void handleActionEvent(ActionEvent event) {
+        // Default implementation
     }
 
     @FXML
