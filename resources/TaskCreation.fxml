@@ -2,30 +2,55 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.TaskCreationController" spacing="10">
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
-    <children>
-        <Label text="Create New Task" fx:id="titleLabel"/>
-        <TextField fx:id="taskNameField" promptText="Task Name"/>
-        <TextArea fx:id="taskDescriptionField" promptText="Description"/>
-        <DatePicker fx:id="dueDatePicker" promptText="Due Date"/>
-        <ComboBox fx:id="priorityComboBox" promptText="Priority">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.TaskCreationController" spacing="10" alignment="CENTER">
+    <!-- Task Creation Form -->
+    <Label text="Create New Task" font="$x-large"/>
+
+    <HBox spacing="10">
+        <Label text="Task Name:"/>
+        <TextField fx:id="txtTaskName" promptText="Enter task name"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Description:"/>
+        <TextArea fx:id="txtDescription" promptText="Enter task description (optional)"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Subtasks:"/>
+        <TextArea fx:id="txtSubtasks" promptText="Enter subtasks (optional)"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Priority:"/>
+        <ChoiceBox fx:id="choicePriority">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="High"/>
-                    <String fx:value="Medium"/>
                     <String fx:value="Low"/>
+                    <String fx:value="Medium"/>
+                    <String fx:value="High"/>
                 </FXCollections>
             </items>
-        </ComboBox>
-        <TextField fx:id="tagsField" promptText="Tags (comma-separated)"/>
-        <Button text="Save Task" onAction="#handleSaveTask"/>
-        <Button text="Cancel" onAction="#handleCancel"/>
-    </children>
+        </ChoiceBox>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Due Date:"/>
+        <DatePicker fx:id="datePickerDueDate"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Category:"/>
+        <TextField fx:id="txtCategory" promptText="Enter task category"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Reminders:"/>
+        <CheckBox fx:id="checkBoxReminders" text="Enable Reminders"/>
+    </HBox>
+
+    <Button text="Create Task" fx:id="btnCreateTask" disable="true"/>
 </VBox>

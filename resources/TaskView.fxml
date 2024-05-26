@@ -2,31 +2,47 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.TaskViewController" spacing="10">
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
-    <children>
-        <Label fx:id="nameLabel" text="Task Name"/>
-        <TextArea fx:id="descriptionArea" promptText="Description"/>
-        <Label fx:id="dueDateLabel" text="Due Date"/>
-        <Label fx:id="priorityLabel" text="Priority"/>
-        <Label fx:id="statusLabel" text="Status"/>
-        <Label fx:id="tagsLabel" text="Tags"/>
-        <TableView fx:id="taskTable">
-            <columns>
-                <TableColumn fx:id="nameColumn" text="Task Name"/>
-                <TableColumn fx:id="descriptionColumn" text="Description"/>
-                <TableColumn fx:id="dueDateColumn" text="Due Date"/>
-                <TableColumn fx:id="priorityColumn" text="Priority"/>
-                <TableColumn fx:id="statusColumn" text="Status"/>
-                <TableColumn fx:id="tagsColumn" text="Tags"/>
-            </columns>
-        </TableView>
-        <Button text="Refresh" onAction="#handleRefresh"/>
-        <Button text="Edit" onAction="#handleEdit"/>
-        <Button text="Delete" onAction="#handleDelete"/>
-    </children>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.TaskViewController" spacing="10" alignment="CENTER">
+    <!-- Task View Header -->
+    <Label text="Task View" font="$x-large"/>
+
+    <!-- Recently Created Tasks -->
+    <Label text="Recently Created Tasks" font="$large"/>
+    <ListView fx:id="listViewRecentTasks"/>
+
+    <!-- Task Details -->
+    <Label text="Task Details" font="$large"/>
+    <GridPane fx:id="taskDetailsGrid" hgap="10" vgap="10">
+        <Label text="Task Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="txtTaskName" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextArea fx:id="txtDescription" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Due Date:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <DatePicker fx:id="datePickerDueDate" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Priority:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <ChoiceBox fx:id="choicePriority" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Low"/>
+                    <String fx:value="Medium"/>
+                    <String fx:value="High"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+
+        <Label text="Progress:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <TextField fx:id="txtProgress" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    </GridPane>
+
+    <!-- Task Management Buttons -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Edit Task" fx:id="btnEditTask"/>
+        <Button text="Delete Task" fx:id="btnDeleteTask"/>
+    </HBox>
 </VBox>

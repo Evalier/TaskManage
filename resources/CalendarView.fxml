@@ -2,23 +2,47 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.CalendarViewController" spacing="10">
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
-    <children>
-        <Label text="Calendar View"/>
-        <TableView fx:id="taskTable">
-            <columns>
-                <TableColumn fx:id="nameColumn" text="Task Name"/>
-                <TableColumn fx:id="dueDateColumn" text="Due Date"/>
-                <TableColumn fx:id="priorityColumn" text="Priority"/>
-                <TableColumn fx:id="statusColumn" text="Status"/>
-                <TableColumn fx:id="tagsColumn" text="Tags"/>
-            </columns>
-        </TableView>
-        <Button text="Refresh" onAction="#handleRefresh"/>
-    </children>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.CalendarViewController">
+    <!-- Top Navigation Controls -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Previous Month" fx:id="btnPreviousMonth"/>
+        <Label text="Month Year" fx:id="lblMonthYear" font="$x-large"/>
+        <Button text="Next Month" fx:id="btnNextMonth"/>
+    </HBox>
+
+    <!-- Month View -->
+    <GridPane fx:id="monthView" alignment="CENTER" hgap="5" vgap="5">
+        <!-- Day Names Header -->
+        <Label text="Sunday" GridPane.columnIndex="0"/>
+        <Label text="Monday" GridPane.columnIndex="1"/>
+        <Label text="Tuesday" GridPane.columnIndex="2"/>
+        <Label text="Wednesday" GridPane.columnIndex="3"/>
+        <Label text="Thursday" GridPane.columnIndex="4"/>
+        <Label text="Friday" GridPane.columnIndex="5"/>
+        <Label text="Saturday" GridPane.columnIndex="6"/>
+
+        <!-- Days of the Month (These will be populated dynamically by the controller) -->
+        <Pane fx:id="day1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Pane fx:id="day2" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <!-- Add more panes for each day -->
+    </GridPane>
+
+    <!-- All Months View -->
+    <HBox alignment="CENTER">
+        <Button text="Show All Months" fx:id="btnShowAllMonths"/>
+    </HBox>
+
+    <!-- Task Details and Editing Section -->
+    <VBox spacing="10" alignment="CENTER">
+        <Label text="Selected Day Details" font="$large"/>
+        <TextArea fx:id="txtDayDetails" promptText="Details about the selected day..."/>
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Edit Task" fx:id="btnEditTask"/>
+            <Button text="Delete Task" fx:id="btnDeleteTask"/>
+        </HBox>
+    </VBox>
 </VBox>
+
