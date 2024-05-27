@@ -3,11 +3,9 @@ package taskmanage.controller.impl;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import taskmanage.constants.EnumsAndConstants;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.impl.DataValidator;
-import taskmanage.utility.impl.DatabaseConnector;
 import taskmanage.utility.facades.UtilityFacade;
 
 import java.sql.Connection;
@@ -39,7 +37,7 @@ public class TaskCreationController {
     }
 
     @FXML
-    private void handleSaveTask() {
+    public void handleSaveTask() {
         String name = taskNameField.getText();
         String description = taskDescriptionField.getText();
         LocalDate dueDate = dueDatePicker.getValue();
@@ -66,7 +64,7 @@ public class TaskCreationController {
         closeWindow();
     }
 
-    public void handleSaveTask(String name, String description, String dueDate, EnumsAndConstants.PriorityLevel priority, List<String> tags) {
+    public void handleSaveTask(String name, String description, String dueDate, PriorityLevel priority, List<String> tags) {
         HashSet<String> tagSet = new HashSet<>(tags);
 
         // Validate inputs
@@ -87,7 +85,6 @@ public class TaskCreationController {
         showAlert(Alert.AlertType.INFORMATION, "Task created successfully.");
         closeWindow();
     }
-
 
     private void addTaskToDatabase(Task task) {
         String query = "INSERT INTO tasks (name, description, dueDate, priority) VALUES (?, ?, ?, ?)";
@@ -120,3 +117,4 @@ public class TaskCreationController {
         alert.showAndWait();
     }
 }
+

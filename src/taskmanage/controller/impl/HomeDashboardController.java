@@ -14,7 +14,6 @@ import taskmanage.constants.EnumsAndConstants;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
-import taskmanage.utility.impl.DatabaseConnector;
 import taskmanage.utility.facades.UtilityFacade;
 
 import java.sql.Connection;
@@ -23,7 +22,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 public class HomeDashboardController implements ControllerInterface {
@@ -169,3 +167,5 @@ public class HomeDashboardController implements ControllerInterface {
         return tasks;
     }
 }
+
+

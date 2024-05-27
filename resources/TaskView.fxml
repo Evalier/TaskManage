@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.TaskViewController">
     <children>
         <HBox>
@@ -29,16 +29,16 @@
                     <!-- Task Details -->
                     <Label text="Task Details" style="-fx-font-size: 16px;" />
                     <GridPane fx:id="taskDetailsGrid" hgap="10" vgap="10">
-                        <Label text="Task Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="Task Name:" fx:id="nameLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                         <TextField fx:id="txtTaskName" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
                         <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <TextArea fx:id="txtDescription" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextArea fx:id="descriptionArea" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-                        <Label text="Due Date:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="Due Date:" fx:id="dueDateLabel" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                         <DatePicker fx:id="datePickerDueDate" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-                        <Label text="Priority:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label text="Priority:" fx:id="priorityLabel" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                         <ChoiceBox fx:id="choicePriority" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -49,8 +49,10 @@
                             </items>
                         </ChoiceBox>
 
-                        <Label text="Progress:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <Label text="Status:" fx:id="statusLabel" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
                         <TextField fx:id="txtProgress" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label text="Tags:" fx:id="tagsLabel" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                     </GridPane>
 
                     <!-- Task Management Buttons -->
@@ -63,4 +65,5 @@
         </HBox>
     </children>
 </VBox>
+
 

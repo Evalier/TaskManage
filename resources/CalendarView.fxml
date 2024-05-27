@@ -3,12 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.CalendarViewControllerSimplified">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.CalendarViewController">
     <children>
         <HBox>
             <children>
@@ -16,9 +18,9 @@
                 <VBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
                     <!-- Top Navigation Controls -->
                     <HBox spacing="10" alignment="CENTER">
-                        <Button text="Previous Month" fx:id="btnPreviousMonth"/>
+                        <Button text="Previous Month" fx:id="btnPreviousMonth" onAction="#handlePreviousMonth"/>
                         <Label text="Month Year" style="-fx-font-size: 20px;" fx:id="lblMonthYear"/>
-                        <Button text="Next Month" fx:id="btnNextMonth"/>
+                        <Button text="Next Month" fx:id="btnNextMonth" onAction="#handleNextMonth"/>
                     </HBox>
 
                     <!-- Month View -->
@@ -38,6 +40,17 @@
                         <!-- Add more panes for each day -->
                     </GridPane>
 
+                    <!-- Task Table View -->
+                    <TableView fx:id="taskTable">
+                        <columns>
+                            <TableColumn fx:id="nameColumn" text="Name"/>
+                            <TableColumn fx:id="dueDateColumn" text="Due Date"/>
+                            <TableColumn fx:id="priorityColumn" text="Priority"/>
+                            <TableColumn fx:id="statusColumn" text="Status"/>
+                            <TableColumn fx:id="tagsColumn" text="Tags"/>
+                        </columns>
+                    </TableView>
+
                     <!-- All Months View -->
                     <HBox alignment="CENTER">
                         <Button text="Show All Months" fx:id="btnShowAllMonths"/>
@@ -48,8 +61,8 @@
                         <Label text="Selected Day Details" style="-fx-font-size: 16px;"/>
                         <TextArea fx:id="txtDayDetails" promptText="Details about the selected day..."/>
                         <HBox spacing="10" alignment="CENTER">
-                            <Button text="Edit Task" fx:id="btnEditTask"/>
-                            <Button text="Delete Task" fx:id="btnDeleteTask"/>
+                            <Button text="Edit Task" fx:id="btnEditTask" onAction="#handleEditTask"/>
+                            <Button text="Delete Task" fx:id="btnDeleteTask" onAction="#handleDeleteTask"/>
                         </HBox>
                     </VBox>
                 </VBox>
@@ -57,3 +70,4 @@
         </HBox>
     </children>
 </VBox>
+

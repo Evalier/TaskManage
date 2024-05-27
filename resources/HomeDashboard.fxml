@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -17,9 +19,9 @@
                 <!-- Left Toolbar -->
                 <VBox spacing="10" style="-fx-background-color: #333; -fx-padding: 10;">
                     <children>
-                        <Button text="Calendar" onAction="#handleCalendar"/>
-                        <Button text="Task Creation" onAction="#handleTaskCreation"/>
-                        <Button text="Task View" onAction="#handleTaskView"/>
+                        <Button text="Calendar" onAction="#handleCalendar" fx:id="calendarButton"/>
+                        <Button text="Task Creation" onAction="#handleTaskCreation" fx:id="taskCreationButton"/>
+                        <Button text="Task View" onAction="#handleTaskView" fx:id="taskViewButton"/>
                     </children>
                 </VBox>
 
@@ -33,6 +35,7 @@
                                 <Label text="Completed Tasks: " fx:id="completedTasksLabel"/>
                                 <Label text="Ongoing Tasks: " fx:id="ongoingTasksLabel"/>
                                 <Label text="Overdue Tasks: " fx:id="overdueTasksLabel"/>
+                                <Label fx:id="summaryLabel" />
                             </children>
                         </VBox>
 
@@ -50,6 +53,20 @@
                                 </BarChart>
                                 <TextArea fx:id="analysisTextArea" wrapText="true" editable="false" promptText="Graph Analysis and Tips"/>
                             </children>
+                        </VBox>
+
+                        <!-- Task Table View -->
+                        <VBox spacing="10" style="-fx-padding: 10;">
+                            <TableView fx:id="taskTable">
+                                <columns>
+                                    <TableColumn fx:id="nameColumn" text="Name"/>
+                                    <TableColumn fx:id="descriptionColumn" text="Description"/>
+                                    <TableColumn fx:id="dueDateColumn" text="Due Date"/>
+                                    <TableColumn fx:id="priorityColumn" text="Priority"/>
+                                    <TableColumn fx:id="statusColumn" text="Status"/>
+                                    <TableColumn fx:id="tagsColumn" text="Tags"/>
+                                </columns>
+                            </TableView>
                         </VBox>
                     </items>
                 </SplitPane>

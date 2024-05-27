@@ -1,13 +1,16 @@
 package taskmanage.controller.impl;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import taskmanage.constants.EnumsAndConstants;
 import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
-import taskmanage.utility.impl.DatabaseConnector;
 import taskmanage.utility.facades.UtilityFacade;
 
 import javafx.event.ActionEvent;
@@ -20,6 +23,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class CalendarViewController implements ControllerInterface {
+    @FXML private Button btnPreviousMonth;
+    @FXML private Button btnNextMonth;
+    @FXML private Label lblMonthYear;
+    @FXML private Pane day1;
+    @FXML private Pane day2;
+    @FXML private TextArea txtDayDetails;
+    @FXML private Button btnEditTask;
+    @FXML private Button btnDeleteTask;
+
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> nameColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
@@ -85,5 +97,29 @@ public class CalendarViewController implements ControllerInterface {
             e.printStackTrace();
         }
         return tasks;
+    }
+
+    @FXML
+    private void handlePreviousMonth() {
+        // Logic to handle previous month action
+        System.out.println("Previous month button clicked");
+    }
+
+    @FXML
+    private void handleNextMonth() {
+        // Logic to handle next month action
+        System.out.println("Next month button clicked");
+    }
+
+    @FXML
+    private void handleEditTask() {
+        // Logic to handle edit task action
+        System.out.println("Edit task button clicked");
+    }
+
+    @FXML
+    private void handleDeleteTask() {
+        // Logic to handle delete task action
+        System.out.println("Delete task button clicked");
     }
 }
