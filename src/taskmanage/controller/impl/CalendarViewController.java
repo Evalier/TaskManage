@@ -12,8 +12,10 @@ import taskmanage.constants.EnumsAndConstants;
 import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.facades.UtilityFacade;
+import taskmanage.main.Main;
 
 import javafx.event.ActionEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,6 +71,30 @@ public class CalendarViewController implements ControllerInterface {
         loadTasks();
     }
 
+    @FXML
+    private void handlePreviousMonth() {
+        // Logic to handle previous month action
+        System.out.println("Previous month button clicked");
+    }
+
+    @FXML
+    private void handleNextMonth() {
+        // Logic to handle next month action
+        System.out.println("Next month button clicked");
+    }
+
+    @FXML
+    private void handleEditTask() {
+        // Logic to handle edit task action
+        System.out.println("Edit task button clicked");
+    }
+
+    @FXML
+    private void handleDeleteTask() {
+        // Logic to handle delete task action
+        System.out.println("Delete task button clicked");
+    }
+
     private void loadTasks() {
         List<Task> tasks = fetchAllTasks();
         taskTable.getItems().setAll(tasks);
@@ -100,26 +126,38 @@ public class CalendarViewController implements ControllerInterface {
     }
 
     @FXML
-    private void handlePreviousMonth() {
-        // Logic to handle previous month action
-        System.out.println("Previous month button clicked");
+    private void handleCalendarView(ActionEvent event) {
+        try {
+            Main.showCalendarView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void handleNextMonth() {
-        // Logic to handle next month action
-        System.out.println("Next month button clicked");
+    private void handleTaskCreation(ActionEvent event) {
+        try {
+            Main.showTaskCreation();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void handleEditTask() {
-        // Logic to handle edit task action
-        System.out.println("Edit task button clicked");
+    private void handleTaskView(ActionEvent event) {
+        try {
+            Main.showTaskView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void handleDeleteTask() {
-        // Logic to handle delete task action
-        System.out.println("Delete task button clicked");
+    private void handleHomeDashboard(ActionEvent event) {
+        try {
+            Main.showHomeDashboard();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

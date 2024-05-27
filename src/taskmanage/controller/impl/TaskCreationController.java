@@ -7,7 +7,10 @@ import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.impl.DataValidator;
 import taskmanage.utility.facades.UtilityFacade;
+import javafx.event.ActionEvent;
+import taskmanage.main.Main;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -116,5 +119,15 @@ public class TaskCreationController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    @FXML
+    private void handleHomeDashboard(ActionEvent event) {
+        try {
+            Main.showHomeDashboard();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 

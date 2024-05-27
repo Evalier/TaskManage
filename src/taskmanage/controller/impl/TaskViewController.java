@@ -13,8 +13,10 @@ import taskmanage.constants.EnumsAndConstants.TaskStatus;
 import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.facades.UtilityFacade;
+import taskmanage.main.Main;
 
 import javafx.event.ActionEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -156,6 +158,34 @@ public class TaskViewController implements ControllerInterface {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    @FXML
+    private void handleHomeDashboard(ActionEvent event) {
+        try {
+            Main.showHomeDashboard();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleTaskCreation(ActionEvent event) {
+        try {
+            Main.showTaskCreation();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleCalendarView(ActionEvent event) {
+        try {
+            Main.showCalendarView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 
 

@@ -9,37 +9,61 @@ import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.controller.impl.TaskViewController;
 import taskmanage.model.impl.Task;
 
+import java.io.IOException;
+
 public class Main extends Application {
+
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Load Task View
-        FXMLLoader taskViewLoader = new FXMLLoader(getClass().getResource("/TaskView.fxml"));
-        Parent taskViewRoot = taskViewLoader.load();
-        TaskViewController taskViewController = taskViewLoader.getController();
-        Task sampleTask = new Task("Sample Task", "This is a sample task description", "2024-12-31", PriorityLevel.MEDIUM);
-        sampleTask.addTag("sample");
-        taskViewController.setTask(sampleTask);
-
-        // Load Task Creation View
-        FXMLLoader taskCreationLoader = new FXMLLoader(getClass().getResource("/TaskCreation.fxml"));
-        Parent taskCreationRoot = taskCreationLoader.load();
-
-        // Load Calendar View
-        FXMLLoader calendarViewLoader = new FXMLLoader(getClass().getResource("/CalendarView.fxml"));
-        Parent calendarViewRoot = calendarViewLoader.load();
-
-        // Load Home Dashboard View
-        FXMLLoader homeDashboardLoader = new FXMLLoader(getClass().getResource("/HomeDashboard.fxml"));
-        Parent homeDashboardRoot = homeDashboardLoader.load();
-
-        // Show one of the views (e.g., Home Dashboard)
-        primaryStage.setTitle("Home Dashboard");
-        primaryStage.setScene(new Scene(homeDashboardRoot));
-        primaryStage.show();
+        Main.primaryStage = primaryStage;
+        showHomeDashboard();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
+    public static void showHomeDashboard() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/HomeDashboard.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Home Dashboard");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void showTaskView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/TaskView.fxml"));
+        Parent root = loader.load();
+        TaskViewController controller = loader.getController();
+        Task sampleTask = new Task("Sample Task", "This is a sample task description", "2024-12-31", PriorityLevel.MEDIUM);
+        sampleTask.addTag("sample");
+        controller.setTask(sampleTask);
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Task View");
+        primaryStage.show();
+    }
+
+    public static void showTaskCreation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/TaskCreation.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Task Creation");
+        primaryStage.show();
+    }
+
+    public static void showCalendarView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/CalendarView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Calendar View");
+        primaryStage.show();
+    }
 }
+
+

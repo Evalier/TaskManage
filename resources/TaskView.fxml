@@ -57,8 +57,15 @@
 
                     <!-- Task Management Buttons -->
                     <HBox spacing="10" alignment="CENTER">
-                        <Button text="Edit Task" fx:id="btnEditTask"/>
-                        <Button text="Delete Task" fx:id="btnDeleteTask"/>
+                        <Button text="Edit Task" fx:id="btnEditTask" onAction="#handleEdit"/>
+                        <Button text="Delete Task" fx:id="btnDeleteTask" onAction="#handleDelete"/>
+                    </HBox>
+
+                    <!-- Navigation Buttons -->
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button text="Home Dashboard" onAction="#handleHomeDashboard"/>
+                        <Button text="Task Creation" onAction="#handleTaskCreation"/>
+                        <Button text="Calendar View" onAction="#handleCalendarView"/>
                     </HBox>
                 </VBox>
             </children>
