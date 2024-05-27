@@ -1,56 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.input.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.TaskCreationController" spacing="10" alignment="CENTER">
-    <!-- Task Creation Form -->
-    <Label text="Create New Task" font="$x-large"/>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.TaskCreationController">
+    <children>
+        <HBox>
+            <children>
+                <!-- Main Content -->
+                <VBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+                    <Label text="Create New Task" style="-fx-font-size: 20px;" />
 
-    <HBox spacing="10">
-        <Label text="Task Name:"/>
-        <TextField fx:id="txtTaskName" promptText="Enter task name"/>
-    </HBox>
+                    <!-- Task Name -->
+                    <HBox spacing="10" alignment="CENTER">
+                        <Label text="Task Name" />
+                        <TextField fx:id="taskNameField" promptText="Enter task name" />
+                    </HBox>
 
-    <HBox spacing="10">
-        <Label text="Description:"/>
-        <TextArea fx:id="txtDescription" promptText="Enter task description (optional)"/>
-    </HBox>
+                    <!-- Task Description -->
+                    <HBox spacing="10" alignment="CENTER">
+                        <Label text="Description" />
+                        <TextArea fx:id="taskDescriptionField" promptText="Enter task description" />
+                    </HBox>
 
-    <HBox spacing="10">
-        <Label text="Subtasks:"/>
-        <TextArea fx:id="txtSubtasks" promptText="Enter subtasks (optional)"/>
-    </HBox>
+                    <!-- Task Details -->
+                    <GridPane alignment="CENTER" hgap="10" vgap="10">
+                        <Label text="Start Date" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="startDateField" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-    <HBox spacing="10">
-        <Label text="Priority:"/>
-        <ChoiceBox fx:id="choicePriority">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Low"/>
-                    <String fx:value="Medium"/>
-                    <String fx:value="High"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
-    </HBox>
+                        <Label text="End Date" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="endDateField" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <HBox spacing="10">
-        <Label text="Due Date:"/>
-        <DatePicker fx:id="datePickerDueDate"/>
-    </HBox>
+                        <Label text="Priority" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="priorityField" promptText="High, Medium, Low" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    </GridPane>
 
-    <HBox spacing="10">
-        <Label text="Category:"/>
-        <TextField fx:id="txtCategory" promptText="Enter task category"/>
-    </HBox>
-
-    <HBox spacing="10">
-        <Label text="Reminders:"/>
-        <CheckBox fx:id="checkBoxReminders" text="Enable Reminders"/>
-    </HBox>
-
-    <Button text="Create Task" fx:id="btnCreateTask" disable="true"/>
+                    <!-- Buttons -->
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button text="Create Task" fx:id="createTaskButton" />
+                        <Button text="Cancel" fx:id="cancelButton" />
+                    </HBox>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
 </VBox>
