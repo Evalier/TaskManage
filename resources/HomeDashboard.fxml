@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="750.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="taskmanage.controller.impl.HomeDashboardController">
+<VBox prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanage.controller.impl.HomeDashboardController">
     <children>
         <HBox>
             <children>
@@ -26,7 +26,7 @@
                 </VBox>
 
                 <!-- Main Content -->
-                <SplitPane dividerPositions="0.5, 0.5" orientation="VERTICAL">
+                <SplitPane dividerPositions="0.5" orientation="VERTICAL">
                     <items>
                         <!-- Task Summary -->
                         <VBox spacing="10" style="-fx-padding: 10;">
@@ -36,6 +36,18 @@
                                 <Label fx:id="ongoingTasksLabel" text="Ongoing Tasks: " />
                                 <Label fx:id="overdueTasksLabel" text="Overdue Tasks: " />
                                 <Label fx:id="summaryLabel" />
+
+                                <!-- Task Table View -->
+                                <TableView fx:id="taskTable">
+                                    <columns>
+                                        <TableColumn fx:id="nameColumn" text="Name" />
+                                        <TableColumn fx:id="descriptionColumn" text="Description" />
+                                        <TableColumn fx:id="dueDateColumn" text="Due Date" />
+                                        <TableColumn fx:id="priorityColumn" text="Priority" />
+                                        <TableColumn fx:id="statusColumn" text="Status" />
+                                        <TableColumn fx:id="tagsColumn" text="Tags" />
+                                    </columns>
+                                </TableView>
                             </children>
                         </VBox>
 
@@ -51,22 +63,8 @@
                                         <NumberAxis label="Number of Tasks" />
                                     </yAxis>
                                 </BarChart>
-                                <TextArea fx:id="analysisTextArea" editable="false" promptText="Graph Analysis and Tips" wrapText="true" />
+                                <TextArea fx:id="analysisTextArea" editable="false" prefHeight="328.0" prefWidth="500.0" promptText="Graph Analysis and Tips" wrapText="true" />
                             </children>
-                        </VBox>
-
-                        <!-- Task Table View -->
-                        <VBox spacing="10" style="-fx-padding: 10;">
-                            <TableView fx:id="taskTable">
-                                <columns>
-                                    <TableColumn fx:id="nameColumn" text="Name" />
-                                    <TableColumn fx:id="descriptionColumn" text="Description" />
-                                    <TableColumn fx:id="dueDateColumn" text="Due Date" />
-                                    <TableColumn fx:id="priorityColumn" text="Priority" />
-                                    <TableColumn fx:id="statusColumn" text="Status" />
-                                    <TableColumn fx:id="tagsColumn" text="Tags" />
-                                </columns>
-                            </TableView>
                         </VBox>
                     </items>
                 </SplitPane>

@@ -26,6 +26,12 @@ public class TaskCreationController {
     @FXML private ComboBox<PriorityLevel> priorityComboBox;
     @FXML private TextField tagsField;
 
+    @FXML private TextField subtask1Field;
+    @FXML private TextField subtask2Field;
+    @FXML private TextField subtask3Field;
+    @FXML private TextField taskCategoryField;
+    @FXML private TextField reminderField;
+
     private static UtilityFacade dbConnector;
 
     public TaskCreationController() {
@@ -48,33 +54,51 @@ public class TaskCreationController {
         String[] tagsArray = tagsField.getText().split(",");
         HashSet<String> tags = new HashSet<>(Arrays.asList(tagsArray));
 
+        String subtask1 = subtask1Field.getText();
+        String subtask2 = subtask2Field.getText();
+        String subtask3 = subtask3Field.getText();
+        String taskCategory = taskCategoryField.getText();
+        String reminders = reminderField.getText();
+
         // Validate inputs
         if (!DataValidator.validateString(name) ||
-                !DataValidator.validateString(description) ||
-                dueDate == null ||
-                !tags.stream().allMatch(DataValidator::validateTag)) {
+                !tags.stream().allMatch(DataValidator::validateTag) ||
+                (priority != null && !DataValidator.validateString(priority.toString())) ||
+                (dueDate != null && !DataValidator.validateDate(dueDate.toString()))) {
             showAlert(Alert.AlertType.ERROR, "Invalid input. Please check your data.");
             return;
         }
 
         // Create and add task
-        Task task = new Task(name, description, dueDate.toString(), priority);
+        Task task = new Task(name, description, dueDate != null ? dueDate.toString() : null, priority);
         for (String tag : tags) {
             task.addTag(tag.trim());
         }
+        if (subtask1 != null && !subtask1.isEmpty()) task.addSubtask(subtask1);
+        if (subtask2 != null && !subtask2.isEmpty()) task.addSubtask(subtask2);
+        if (subtask3 != null && !subtask3.isEmpty()) task.addSubtask(subtask3);
+        task.setCategory(taskCategory);
+        task.setReminders(reminders);
+
         addTaskToDatabase(task);
         showAlert(Alert.AlertType.INFORMATION, "Task created successfully.");
         closeWindow();
     }
 
+    // Overloaded method for backward compatibility
     public void handleSaveTask(String name, String description, String dueDate, PriorityLevel priority, List<String> tags) {
+        handleSaveTask(name, description, dueDate, priority, tags, null, null, null);
+    }
+
+    public void handleSaveTask(String name, String description, String dueDate, PriorityLevel priority, List<String> tags, List<String> subtasks, String taskCategory, String reminders) {
         HashSet<String> tagSet = new HashSet<>(tags);
 
         // Validate inputs
         if (!DataValidator.validateString(name) ||
-                !DataValidator.validateString(description) ||
-                dueDate == null ||
-                !tagSet.stream().allMatch(DataValidator::validateTag)) {
+                !tagSet.stream().allMatch(DataValidator::validateTag) ||
+                (priority != null && !DataValidator.validateString(priority.toString())) ||
+                (dueDate != null && !DataValidator.validateDate(dueDate)) ||
+                (subtasks != null && !subtasks.stream().allMatch(DataValidator::validateString))) {
             showAlert(Alert.AlertType.ERROR, "Invalid input. Please check your data.");
             return;
         }
@@ -84,19 +108,29 @@ public class TaskCreationController {
         for (String tag : tagSet) {
             task.addTag(tag.trim());
         }
+        if (subtasks != null) {
+            for (String subtask : subtasks) {
+                if (subtask != null && !subtask.isEmpty()) task.addSubtask(subtask);
+            }
+        }
+        task.setCategory(taskCategory);
+        task.setReminders(reminders);
+
         addTaskToDatabase(task);
         showAlert(Alert.AlertType.INFORMATION, "Task created successfully.");
         closeWindow();
     }
 
     private void addTaskToDatabase(Task task) {
-        String query = "INSERT INTO tasks (name, description, dueDate, priority) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO tasks (name, description, dueDate, priority, category, reminders) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = dbConnector.connectToDatabase();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, task.getName());
             preparedStatement.setString(2, task.getDescription());
             preparedStatement.setString(3, task.getDueDate());
-            preparedStatement.setString(4, task.getPriority().toString());
+            preparedStatement.setString(4, task.getPriority() != null ? task.getPriority().toString() : null);
+            preparedStatement.setString(5, task.getCategory());
+            preparedStatement.setString(6, task.getReminders());
             preparedStatement.executeUpdate();
             System.out.println("Task added: " + task.getName());
         } catch (SQLException e) {
@@ -147,3 +181,5 @@ public class TaskCreationController {
         }
     }
 }
+
+

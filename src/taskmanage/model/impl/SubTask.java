@@ -3,7 +3,6 @@ package taskmanage.model.impl;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.constants.EnumsAndConstants.TaskStatus;
 import taskmanage.utility.facades.UtilityFacade;
-import taskmanage.utility.impl.DatabaseConnector;
 import taskmanage.model.interfaces.ModelInterface;
 
 public class SubTask implements ModelInterface {
@@ -16,17 +15,30 @@ public class SubTask implements ModelInterface {
     private TaskStatus status;
 
     // Constructor
-    public SubTask (int id, String name, String description, String dueDate, PriorityLevel priority, TaskStatus status) {
+    public SubTask(int id, String name, String description, String dueDate, PriorityLevel priority, TaskStatus status) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.status = status;
+    }
 
+    // New constructor to accept only a String for name
+    public SubTask(String name) {
+        this.name = name;
         this.status = TaskStatus.PENDING;  // Default status
     }
 
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -86,11 +98,11 @@ public class SubTask implements ModelInterface {
         System.out.println("Record saved.");
     }
 
-
     @Override
     public String toString() {
         return "SubTask{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", dueDate='" + dueDate + '\'' +
                 ", priority=" + priority +
@@ -98,4 +110,5 @@ public class SubTask implements ModelInterface {
                 '}';
     }
 }
+
 

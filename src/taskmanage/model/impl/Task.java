@@ -20,6 +20,8 @@ public class Task implements ModelInterface {
     private TaskStatus status;
     private List<SubTask> subTasks = new ArrayList<>();
     private Set<String> tags = new HashSet<>();
+    private String category;
+    private String reminders;
 
     // No-parameter constructor
     public Task() {
@@ -151,6 +153,27 @@ public class Task implements ModelInterface {
         this.subTasks.remove(subTask);
     }
 
+    public void addSubtask(String subtask) {
+        this.subTasks.add(new SubTask(subtask));
+    }
+
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(String reminders) {
+        this.reminders = reminders;
+    }
+
     @Override
     public boolean validate() {
         return true; // Add actual validation logic
@@ -164,7 +187,7 @@ public class Task implements ModelInterface {
         }
 
         UtilityFacade dbConnector = new UtilityFacade();
-        String query = "INSERT INTO tasks (name, description, dueDate, completionDate, priority, status) VALUES (values)"; // Replace with actual table name and fields
+        String query = "INSERT INTO tasks (name, description, dueDate, completionDate, priority, status, category, reminders) VALUES (values)"; // Replace with actual table name and fields
         dbConnector.executeUpdate(query);
         System.out.println("Record saved.");
     }
@@ -181,7 +204,10 @@ public class Task implements ModelInterface {
                 ", status=" + status +
                 ", subTasks=" + subTasks +
                 ", tags=" + tags +
+                ", category='" + category + '\'' +
+                ", reminders='" + reminders + '\'' +
                 '}';
     }
 }
+
 
