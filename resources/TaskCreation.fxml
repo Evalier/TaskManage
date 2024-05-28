@@ -33,7 +33,10 @@
 
                     <!-- Task Description -->
                     <HBox alignment="CENTER" spacing="10">
-                        <Label text="Description (optional):" />
+                        <VBox alignment="CENTER_LEFT">
+                            <Label text="Description:" />
+                            <Label text="(optional)" />
+                        </VBox>
                         <TextArea fx:id="taskDescriptionField" promptText="Enter task description" prefHeight="100.0" />
                     </HBox>
 

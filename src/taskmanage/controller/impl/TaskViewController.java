@@ -1,11 +1,7 @@
 package taskmanage.controller.impl;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import taskmanage.constants.EnumsAndConstants;
 import taskmanage.constants.EnumsAndConstants.PriorityLevel;
@@ -34,6 +30,12 @@ public class TaskViewController implements ControllerInterface {
     @FXML private Label statusLabel;
     @FXML private Label tagsLabel;
     @FXML private TableView<Task> taskTable;
+
+    @FXML private TextField categoryField;
+    @FXML private TextField remindersField;
+    @FXML private TextField subtask1Field;
+    @FXML private TextField subtask2Field;
+    @FXML private TextField subtask3Field;
 
     private Task task;
     private static UtilityFacade dbConnector;
@@ -67,6 +69,14 @@ public class TaskViewController implements ControllerInterface {
         priorityLabel.setText(task.getPriority().toString());
         statusLabel.setText(task.getStatus() != null ? task.getStatus().toString() : "No Status");
         tagsLabel.setText(String.join(", ", task.getTags()));
+
+        // Assuming these methods are added to the Task model
+        categoryField.setText(task.getCategory());
+        remindersField.setText(task.getReminders());
+        List<String> subtasks = task.getSubtasks();
+        subtask1Field.setText(subtasks.size() > 0 ? subtasks.get(0) : "");
+        subtask2Field.setText(subtasks.size() > 1 ? subtasks.get(1) : "");
+        subtask3Field.setText(subtasks.size() > 2 ? subtasks.get(2) : "");
     }
 
     @FXML
@@ -89,6 +99,16 @@ public class TaskViewController implements ControllerInterface {
         });
     }
 
+    @FXML
+    private void handleMarkComplete() {
+        if (task != null) {
+            task.setStatus(TaskStatus.COMPLETE);
+            updateTaskInDatabase(task);
+            showAlert(Alert.AlertType.INFORMATION, "Task marked as complete.");
+            updateUI();
+        }
+    }
+
     private void loadTasks() {
         List<Task> tasks = fetchTasks();
         taskTable.getItems().clear();
@@ -100,6 +120,18 @@ public class TaskViewController implements ControllerInterface {
         try (Connection connection = dbConnector.connectToDatabase();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, taskId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateTaskInDatabase(Task task) {
+        String query = "UPDATE tasks SET status = ? WHERE id = ?";
+        try (Connection connection = dbConnector.connectToDatabase();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, task.getStatus().toString());
+            preparedStatement.setInt(2, task.getID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -186,6 +218,8 @@ public class TaskViewController implements ControllerInterface {
         }
     }
 }
+
+
 
 
 

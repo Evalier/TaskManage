@@ -157,6 +157,13 @@ public class Task implements ModelInterface {
         this.subTasks.add(new SubTask(subtask));
     }
 
+    public List<String> getSubtasks() {
+        List<String> subtaskNames = new ArrayList<>();
+        for (SubTask subTask : subTasks) {
+            subtaskNames.add(subTask.getName());
+        }
+        return subtaskNames;
+    }
 
     public String getCategory() {
         return category;
@@ -209,5 +216,6 @@ public class Task implements ModelInterface {
                 '}';
     }
 }
+
 
 
