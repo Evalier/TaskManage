@@ -58,6 +58,9 @@
                         <!-- Add more panes for each day -->
                     </GridPane>
 
+                    <!-- Current View Mode Label -->
+                    <Label fx:id="lblCurrentViewMode" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="All Months View" />
+
                     <!-- Task Table View -->
                     <TableView fx:id="taskTable">
                         <columns>
@@ -70,8 +73,9 @@
                     </TableView>
 
                     <!-- All Months View -->
-                    <HBox alignment="CENTER">
+                    <HBox alignment="CENTER" spacing="10">
                         <Button fx:id="btnShowAllMonths" text="Show All Months" />
+                        <Button fx:id="btnSpecificMonthView" text="Specific Month View" />
                     </HBox>
 
                     <!-- Task Details and Editing Section -->
@@ -97,3 +101,4 @@
         </HBox>
     </children>
 </VBox>
+

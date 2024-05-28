@@ -27,7 +27,10 @@ import java.util.List;
 public class CalendarViewController implements ControllerInterface {
     @FXML private Button btnPreviousMonth;
     @FXML private Button btnNextMonth;
+    @FXML private Button btnShowAllMonths;
+    @FXML private Button btnSpecificMonthView;
     @FXML private Label lblMonthYear;
+    @FXML private Label lblCurrentViewMode;
     @FXML private Pane day1;
     @FXML private Pane day2;
     @FXML private TextArea txtDayDetails;
@@ -58,6 +61,7 @@ public class CalendarViewController implements ControllerInterface {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         tagsColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
 
+        lblCurrentViewMode.setText("All Months View");
         loadTasks();
     }
 
@@ -81,6 +85,20 @@ public class CalendarViewController implements ControllerInterface {
     private void handleNextMonth() {
         // Logic to handle next month action
         System.out.println("Next month button clicked");
+    }
+
+    @FXML
+    private void handleSpecificMonthView() {
+        lblCurrentViewMode.setText("Specific Month View");
+        // Logic to handle specific month view action
+        System.out.println("Specific month view button clicked");
+    }
+
+    @FXML
+    private void handleShowAllMonths() {
+        lblCurrentViewMode.setText("All Months View");
+        // Logic to handle all months view action
+        System.out.println("Show all months button clicked");
     }
 
     @FXML
@@ -161,4 +179,3 @@ public class CalendarViewController implements ControllerInterface {
         }
     }
 }
-
