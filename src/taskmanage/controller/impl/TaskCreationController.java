@@ -128,6 +128,22 @@ public class TaskCreationController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleTaskView(ActionEvent event) {
+        try {
+            Main.showTaskView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleCalendarView(ActionEvent event) {
+        try {
+            Main.showCalendarView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-

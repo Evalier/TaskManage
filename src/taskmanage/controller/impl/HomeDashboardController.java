@@ -15,7 +15,9 @@ import taskmanage.constants.EnumsAndConstants.PriorityLevel;
 import taskmanage.controller.interfaces.ControllerInterface;
 import taskmanage.model.impl.Task;
 import taskmanage.utility.facades.UtilityFacade;
+import taskmanage.main.Main;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,23 +79,29 @@ public class HomeDashboardController implements ControllerInterface {
 
     @FXML
     public void handleCalendar(ActionEvent event) {
-        // Handle calendar button action
-        System.out.println("Calendar button clicked");
-        // Implement the logic to switch to the Calendar screen
+        try {
+            Main.showCalendarView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void handleTaskCreation(ActionEvent event) {
-        // Handle task creation button action
-        System.out.println("Task Creation button clicked");
-        // Implement the logic to switch to the Task Creation screen
+        try {
+            Main.showTaskCreation();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void handleTaskView(ActionEvent event) {
-        // Handle task view button action
-        System.out.println("Task View button clicked");
-        // Implement the logic to switch to the Task View screen
+        try {
+            Main.showTaskView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -167,5 +175,6 @@ public class HomeDashboardController implements ControllerInterface {
         return tasks;
     }
 }
+
 
 

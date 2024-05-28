@@ -6,35 +6,35 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="taskmanage.controller.impl.HomeDashboardController">
+<VBox prefHeight="750.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="taskmanage.controller.impl.HomeDashboardController">
     <children>
         <HBox>
             <children>
                 <!-- Left Toolbar -->
                 <VBox spacing="10" style="-fx-background-color: #333; -fx-padding: 10;">
                     <children>
-                        <Button text="Calendar" onAction="#handleCalendar" fx:id="calendarButton"/>
-                        <Button text="Task Creation" onAction="#handleTaskCreation" fx:id="taskCreationButton"/>
-                        <Button text="Task View" onAction="#handleTaskView" fx:id="taskViewButton"/>
+                        <Button fx:id="calendarButton" onAction="#handleCalendar" text="Calendar" />
+                        <Button fx:id="taskCreationButton" onAction="#handleTaskCreation" text="Task Creation" />
+                        <Button fx:id="taskViewButton" onAction="#handleTaskView" text="Task View" />
                     </children>
                 </VBox>
 
                 <!-- Main Content -->
-                <SplitPane orientation="VERTICAL">
+                <SplitPane dividerPositions="0.5, 0.5" orientation="VERTICAL">
                     <items>
                         <!-- Task Summary -->
                         <VBox spacing="10" style="-fx-padding: 10;">
                             <children>
-                                <Label text="Task Summary" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                                <Label text="Completed Tasks: " fx:id="completedTasksLabel"/>
-                                <Label text="Ongoing Tasks: " fx:id="ongoingTasksLabel"/>
-                                <Label text="Overdue Tasks: " fx:id="overdueTasksLabel"/>
+                                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Task Summary" />
+                                <Label fx:id="completedTasksLabel" text="Completed Tasks: " />
+                                <Label fx:id="ongoingTasksLabel" text="Ongoing Tasks: " />
+                                <Label fx:id="overdueTasksLabel" text="Overdue Tasks: " />
                                 <Label fx:id="summaryLabel" />
                             </children>
                         </VBox>
@@ -42,16 +42,16 @@
                         <!-- Statistical Graphics -->
                         <VBox spacing="10" style="-fx-padding: 10;">
                             <children>
-                                <Label text="Statistical Graphics" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Statistical Graphics" />
                                 <BarChart fx:id="taskBarChart">
                                     <xAxis>
-                                        <CategoryAxis label="Task Status"/>
+                                        <CategoryAxis label="Task Status" />
                                     </xAxis>
                                     <yAxis>
-                                        <NumberAxis label="Number of Tasks"/>
+                                        <NumberAxis label="Number of Tasks" />
                                     </yAxis>
                                 </BarChart>
-                                <TextArea fx:id="analysisTextArea" wrapText="true" editable="false" promptText="Graph Analysis and Tips"/>
+                                <TextArea fx:id="analysisTextArea" editable="false" promptText="Graph Analysis and Tips" wrapText="true" />
                             </children>
                         </VBox>
 
@@ -59,12 +59,12 @@
                         <VBox spacing="10" style="-fx-padding: 10;">
                             <TableView fx:id="taskTable">
                                 <columns>
-                                    <TableColumn fx:id="nameColumn" text="Name"/>
-                                    <TableColumn fx:id="descriptionColumn" text="Description"/>
-                                    <TableColumn fx:id="dueDateColumn" text="Due Date"/>
-                                    <TableColumn fx:id="priorityColumn" text="Priority"/>
-                                    <TableColumn fx:id="statusColumn" text="Status"/>
-                                    <TableColumn fx:id="tagsColumn" text="Tags"/>
+                                    <TableColumn fx:id="nameColumn" text="Name" />
+                                    <TableColumn fx:id="descriptionColumn" text="Description" />
+                                    <TableColumn fx:id="dueDateColumn" text="Due Date" />
+                                    <TableColumn fx:id="priorityColumn" text="Priority" />
+                                    <TableColumn fx:id="statusColumn" text="Status" />
+                                    <TableColumn fx:id="tagsColumn" text="Tags" />
                                 </columns>
                             </TableView>
                         </VBox>
@@ -74,4 +74,3 @@
         </HBox>
     </children>
 </VBox>
-
