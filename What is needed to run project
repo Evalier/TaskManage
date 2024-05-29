@@ -13,7 +13,7 @@ Edit Configurations
     *Make a new application, I just called mine TaskManage
     *add taskmanage.main.Main in the main text box
     *go to modify options, then add VM options
-    *now properly add JavaFX functionality
+    *now properly add JavaFX functionality inside the VM options
         *add the path to the JavaFX lib and select chosen modules
         --module-path path/to/lib/folder --add-modules javafx.controls,javafx.fxml
 
