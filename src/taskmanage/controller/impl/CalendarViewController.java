@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,9 +21,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class CalendarViewController implements ControllerInterface {
     @FXML private Button btnPreviousMonth;
@@ -36,20 +40,22 @@ public class CalendarViewController implements ControllerInterface {
     @FXML private TextArea txtDayDetails;
     @FXML private Button btnEditTask;
     @FXML private Button btnDeleteTask;
-
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> nameColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> priorityColumn;
     @FXML private TableColumn<Task, String> statusColumn;
     @FXML private TableColumn<Task, String> tagsColumn;
+    @FXML private GridPane monthView;
 
     private static UtilityFacade dbConnector;
+    private LocalDate currentDate;
 
     public CalendarViewController() {
         if (dbConnector == null) {
             dbConnector = new UtilityFacade();
         }
+        currentDate = LocalDate.now();
     }
 
     @Override
@@ -62,7 +68,9 @@ public class CalendarViewController implements ControllerInterface {
         tagsColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
 
         lblCurrentViewMode.setText("All Months View");
+        updateMonthYearLabel();
         loadTasks();
+        populateMonthView();
     }
 
     @Override
@@ -73,43 +81,67 @@ public class CalendarViewController implements ControllerInterface {
     @FXML
     public void handleRefresh() {
         loadTasks();
+        populateMonthView();
+    }
+
+    //Method to update the month
+    private void updateMonthYearLabel() {
+        String monthYear = currentDate.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()) + " " + currentDate.getYear();
+        lblMonthYear.setText(monthYear);
+    }
+
+    //Method to populate the grid calendar view display
+    private void populateMonthView()
+    {
+        monthView.getChildren().clear(); // Clear previous panes
+        for (int i = 0; i < 5; i++)
+        { // Assuming a 5-week month view
+            for (int j = 0; j < 7; j++)
+            {
+                //Pane panel settings subject to change
+                Pane dayPane = new Pane();
+                dayPane.setPrefSize(100, 100); // Set preferred size for each day pane
+                dayPane.setStyle("-fx-border-color: black;"); // Add border for visibility
+                monthView.add(dayPane, j, i + 1); // Add the pane to the grid
+            }
+        }
     }
 
     @FXML
     private void handlePreviousMonth() {
-        // Logic to handle previous month action
-        System.out.println("Previous month button clicked");
+        currentDate = currentDate.minusMonths(1);
+        updateMonthYearLabel();
+        loadTasks();
+        populateMonthView();
     }
 
     @FXML
     private void handleNextMonth() {
-        // Logic to handle next month action
-        System.out.println("Next month button clicked");
+        currentDate = currentDate.plusMonths(1);
+        updateMonthYearLabel();
+        loadTasks();
+        populateMonthView();
     }
 
     @FXML
     private void handleSpecificMonthView() {
         lblCurrentViewMode.setText("Specific Month View");
-        // Logic to handle specific month view action
         System.out.println("Specific month view button clicked");
     }
 
     @FXML
     private void handleShowAllMonths() {
         lblCurrentViewMode.setText("All Months View");
-        // Logic to handle all months view action
         System.out.println("Show all months button clicked");
     }
 
     @FXML
     private void handleEditTask() {
-        // Logic to handle edit task action
         System.out.println("Edit task button clicked");
     }
 
     @FXML
     private void handleDeleteTask() {
-        // Logic to handle delete task action
         System.out.println("Delete task button clicked");
     }
 
@@ -132,7 +164,6 @@ public class CalendarViewController implements ControllerInterface {
                         resultSet.getString("dueDate"),
                         EnumsAndConstants.PriorityLevel.valueOf(resultSet.getString("priority"))
                 );
-                // Set additional fields if necessary
                 task.setStatus(EnumsAndConstants.TaskStatus.valueOf(resultSet.getString("status")));
                 task.setTags(Collections.singleton(resultSet.getString("tags")));
                 tasks.add(task);
