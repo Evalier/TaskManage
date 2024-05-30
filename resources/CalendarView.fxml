@@ -59,7 +59,7 @@
                     </GridPane>
 
                     <!-- Current View Mode Label -->
-                    <Label fx:id="lblCurrentViewMode" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="All Months View" />
+                    <Label fx:id="lblCurrentViewMode" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Specific Month View" />
 
                     <!-- Task Table View -->
                     <TableView fx:id="taskTable">
@@ -72,10 +72,10 @@
                         </columns>
                     </TableView>
 
-                    <!-- All Months View -->
+                    <!-- View Mode Buttons -->
                     <HBox alignment="CENTER" spacing="10">
-                        <Button fx:id="btnShowAllMonths" text="Show All Months" />
-                        <Button fx:id="btnSpecificMonthView" text="Specific Month View" />
+                        <Button fx:id="btnShowAllMonths" text="Show All Months" onAction="#handleShowAllMonths"/>
+                        <Button fx:id="btnSpecificMonthView" text="Specific Month View" onAction="#handleSpecificMonthView"/>
                     </HBox>
 
                     <!-- Task Details and Editing Section -->
@@ -101,4 +101,3 @@
         </HBox>
     </children>
 </VBox>
-
