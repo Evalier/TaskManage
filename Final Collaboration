@@ -1,0 +1,42 @@
+Final Collaboration
+
+I will upload this Google Doc to GitHub as well
+
+I am Dylan–and in case you all are reading this for the first time on GitHub, my phone broke and I will not be able to communicate through there anymore unfortunately. 
+I will be checking this document daily (on Google Docs), and I will also be checking my school email daily. If you need to contact me, do so through one of these.
+
+Dylan:
+I will submit my changes to the project before the day of our finals, and I will make sure if anyone needs assistance on that day to integrate their changes into the project I will be able to help.
+
+I don’t plan on spending a lot of time on it however. Ive got a D+ in a class and I am prioritizing studying for the final so I can get by with a C.
+I certainly will not be able to bring the project to a state where it can satisfy all of our requirements–even with the help you guys may bring.
+I do not want you guys to have an unrealistic expectation of what will happen. 
+
+I’ll try to get a game plan together:
+
+What needs to be done: (summary–I have really built the foundation for the program, it just needs to be brought up. Imagine a pyramid. If our project is a pyramid, it has three parts. The bottom is the functionality and feature logic. The middle is the controller logic. 
+The top is the functionality of the GUI. I have built at least 85% of the bottom layer I think.
+The controllers must implement the missing features and whatnot from the rest of the program, then each controller file must translate its logic to its associated FXML file and GUI screen.)
+
+Expanded summary:
+  Have project actually work
+    GUI actually works in that a user can take full advantage and utilize every feature laid out
+      For this to happen controller logic must be built and successfully integrated within the GUI
+      Logic still needs to be built within the Controller Classes, but I would actually say most of it has already been built.
+      Some logic that still needs to be built can be done somewhat easily, as this logic itself has already been truly built in either the utility, constants, model, or feature package.
+      Some stuff may truly need to be built from the ground up.
+    No matter how much great logic the controller file has, it still needs to connect to its associated FXML file and integrate its logic within the GUI.
+    Database
+      Data actually goes to a database, and is stored there. When a user logs back in, the data is still there and the program retrieves it
+      GUI must interact with database
+other
+
+
+
+Everybody’s role:
+Eva implements a database and its functions
+Alex implements Calendar to the extent where it covers at least the biggest requirements which were laid out in the proposal
+I will implement a user log in screen. I might do other things, but I will only promise a user log in screen.
+
+
+Feel free to edit this document
