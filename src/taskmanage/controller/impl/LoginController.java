@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import java.io.IOException;
 import taskmanage.main.Main;
 import taskmanage.utility.facades.UtilityFacade;
+
+import java.io.IOException;
 
 public class LoginController {
     @FXML private TextField usernameField;
@@ -23,7 +23,7 @@ public class LoginController {
     }
 
     @FXML
-    private void handleLoginAction(ActionEvent event) {
+    public void handleLoginAction(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -51,3 +51,4 @@ public class LoginController {
         alert.showAndWait();
     }
 }
+

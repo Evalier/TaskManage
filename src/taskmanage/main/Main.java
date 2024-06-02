@@ -18,11 +18,20 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Main.primaryStage = primaryStage;
-        showHomeDashboard();
+        showLoginScreen();
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void showLoginScreen() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/LoginScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Login");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public static void showHomeDashboard() throws IOException {
@@ -65,5 +74,4 @@ public class Main extends Application {
         primaryStage.show();
     }
 }
-
 
